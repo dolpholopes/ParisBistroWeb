@@ -16,10 +16,11 @@ let categoriaSelecionadaAlterar;
 let categoriaSelecionadaRemover;
 
 let tabela = document.getElementById("tabelaCategoria").getElementsByTagName("tbody")[0]
-let bd = firebase.firestore().collection("categorias");
-storage = firebase.storage().ref().child("categorias");
-let keyLista = []
 
+let bd = firebase.firestore().collection("categorias");
+let storage = firebase.storage().ref().child("categorias");
+
+let keyLista = []
 
 
 // ==================== OUVINTE ===============================  
@@ -73,7 +74,7 @@ function criarItensTabela(dados) {
 // Alterando  itens tabela
 function alterarItensTabela(dados) {
     const index = keyLista.indexOf(dados.id)
-    const row = tabela.row[index]
+    const row = tabela.rows[index]
     const cellId = row.cells[0]
     const cellNome = row.cells[1]
 
@@ -163,7 +164,8 @@ function salvarImagemFirebase(id, nome) {
     upload.on("state_changed", function (snapshot) {
 
     }, function (error) {
-        abrirModalAlerta("erro ao adicionar os dados " + error)
+        abrirModalAlerta("erro ao salvar imagem")
+        removerModalProgress()
 
     }, function () {
 
@@ -230,12 +232,16 @@ function buttonAlterarValidarCampos() {
     const nome = document.getElementById("alterarNome").value
 
     if (categoriaSelecionadaAlterar.nome.trim() == nome.trim() && imagemSelecionada == null) {
-
-    } else if (nome.trim() == "") {
-
-    } else if (imagemSelecionada != null) {
+        abrirModalAlerta("Nenhuma informação foi alterada")
+    } 
+    else if (nome.trim() == "") {
+        abrirModalAlerta("Preencha os campos corretamente")
+    }
+     else if (imagemSelecionada != null) {
+        abrirModalProgress()
         alterarImagemFirebase(id, nome)
-    } else {
+    } 
+    else {
         abrirModalProgress()
         alterarDadosFirebase(id, nome, categoriaSelecionadaAlterar.url_imagem)
     }
@@ -248,7 +254,8 @@ function alterarImagemFirebase(id, nome) {
     upload.on("state_changed", function (snapshot) {
 
     }, function (error) {
-        abrirModalAlerta("erro ao alterar os dados " + error)
+        abrirModalAlerta("erro ao alterar a imagem")
+        removerModalProgress()
 
     }, function () {
 
@@ -377,7 +384,7 @@ function removerImagemFirebase() {
 //remover dados firebase
 function removerDadosFirebase() {
     const id = categoriaSelecionadaRemover.id
-    bd.doc(id).delete(dados).then(function () {
+    bd.doc(id).delete().then(function () {
 
         $("#modalRemover").modal("hide")
         removerModalProgress()
@@ -414,15 +421,15 @@ function pesquisar() {
 }
 
 //função pesquisar nome
-function pesquisarNome() {
+function pesquisarNome(opcao) {
     let inputValor, filtro, tr, td, i, valorItemTabela;
 
-    inputValor = document.getElementById("pesquisar1").value;
+    inputValor = document.getElementById("pesquisar" + opcao).value;
     filtro = inputValor.toUpperCase()
     tr = tabela.getElementsByTagName("tr")
 
     for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[1]
+        td = tr[i].getElementsByTagName("td")[opcao]
         if (td) {
             valorItemTabela = td.textContent.toUpperCase()
             if (valorItemTabela.indexOf(filtro) == -1) {
@@ -494,7 +501,7 @@ function ordenarId() {
 
 //ordem decrescente
 function ordemDecrescente() {
-    let tr = tabela.getElementsByTagName("tr")
+    let tr = tabela.getElementsByTagName('tr')
 
     for (let i = 0; i < tr.length - 1; i++) {
         for (let j = 0; j < tr.length - (i + 1); j++) {
@@ -515,7 +522,7 @@ function ordemDecrescente() {
 
 //ordem crescente
 function ordemCrescente() {
-    let tr = tabela.getElementsByTagName("tr")
+    let tr = tabela.getElementsByTagName('tr')
 
     for (let i = 0; i < tr.length - 1; i++) {
         for (let j = 0; j < tr.length - (i - 1); j++) {
@@ -547,7 +554,7 @@ function abrirModalProgress() {
 }
 function removerModalProgress() {
     $("#modalProgress").modal("hide")
-    window.setTimeout(function () {
-        document, getElementById("modalProgress").click()
-    }, 500)
+    //window.setTimeout(function () {
+     //   document.getElementById("#modalProgress").click()
+   // }, 500)
 }
