@@ -20,10 +20,47 @@ let tabela = document.getElementById("tabelaProduto").getElementsByTagName("tbod
 let bd = firebase.firestore().collection("produtos");
 let storage = firebase.storage().ref().child("produtos");
 
+let bdCategoria = firebase.firestore().collection("categorias");
+let categoriasIds = new Map()
+let categoriasNomes = new Map()
+
 let keyLista = []
 
 
-// ==================== OUVINTE ===============================  
+// ==================== OUVINTE CATEGORIAS ===============================
+
+bdCategoria.onSnapshot(function (documentos) {
+
+    documentos.docChanges().forEach(function (changes) {
+        if (changes.type === "added") {
+            const doc = changes.doc
+            const dados = doc.data()
+            criarItensDropdown(dados)
+        }
+    })
+})
+
+//Exibindo categorias modal adicionar/alterar
+function criarItensDropdown(dados){
+    
+    categoriasIds.set(dados.nome, dados.id)
+    categoriasNomes.set(dados.id, dados.nome)
+   
+    const dropDownAdicionar = document.getElementById("adicionarDropdown")
+    const dropDownAlterar = document.getElementById("alterarDropdown")
+    
+    const optionAdicionar = document.createElement("OPTION")
+    optionAdicionar.innerHTML = dados.nome
+    
+    const optionAlterar = document.createElement("OPTION")
+    optionAlterar.innerHTML = dados.nome
+
+    dropDownAdicionar.options.add(optionAdicionar)
+    dropDownAlterar.options.add(optionAlterar)
+}
+
+
+// ==================== OUVINTE PRODUTOS ===============================  
 bd.onSnapshot(function (documentos) {
 
     documentos.docChanges().forEach(function (changes) {
@@ -58,13 +95,16 @@ function criarItensTabela(dados) {
 
     const colunaId = linha.insertCell(0)
     const colunaNome = linha.insertCell(1)
-    const colunaAcoes = linha.insertCell(2)
+    const colunaValor = linha.insertCell(2)
+    const colunaAcoes = linha.insertCell(3)
 
     const itemId = document.createTextNode(dados.id)
     const itemNome = document.createTextNode(dados.nome)
+    const itemValor = document.createTextNode(dados.valor)
 
     colunaId.appendChild(itemId)
     colunaNome.appendChild(itemNome)
+    colunaValor.appendChild(itemValor)
 
     criarBotoesTabela(colunaAcoes, dados)
     ordemCrescente()
@@ -77,14 +117,16 @@ function alterarItensTabela(dados) {
     const row = tabela.rows[index]
     const cellId = row.cells[0]
     const cellNome = row.cells[1]
+    const cellValor = row.cells[2]
 
-    const acoes = row.cells[2]
+    const acoes = row.cells[3]
     acoes.remove()
 
-    const colunaAcoes = row.insertCell(2)
+    const colunaAcoes = row.insertCell(3)
 
     cellId.innerText = dados.id
     cellNome.innerText = dados.nome
+    cellValor.innerText = dados.valor
 
     criarBotoesTabela(colunaAcoes, dados)
 
@@ -123,172 +165,6 @@ function criarBotoesTabela(colunaAcoes, dados) {
     colunaAcoes.appendChild(buttonRemover)
 
 }
-
-
-//================ MODAL ADICIONAR ======================
-//abrir modal
-function abrirModalAdicionar() {
-    $("#modalAdicionar").modal()
-}
-
-//limpando compos modal adicionar
-function limparCamposAdicionar() {
-    document.getElementById("adicionarID").value = ""
-    document.getElementById("adicionarNome").value = ""
-    document.getElementById("imagemAdicionar").src = "#"
-    $("#imagemUploadAdicionar").val("")
-    imagemSelecionada = null
-}
-
-//botão adicionar
-function buttonAdicionarValidarCampos() {
-    const id = document.getElementById("adicionarID").value
-    const nome = document.getElementById("adicionarNome").value
-
-    if (keyLista.indexOf(id) > -1) {
-        abrirModalAlerta("Este ID ja foi cadastrado, tente outro")
-    } else if (nome.trim() == "" || id.trim() == "") {
-        abrirModalAlerta("ID e nome são obrigatórios")
-    } else if (imagemSelecionada == null) {
-        abrirModalAlerta("Insira a imagem do produto")
-    } else {
-        abrirModalProgress()
-        salvarImagemFirebase(id, nome)
-    }
-}
-
-//adicionando imagem firebase
-function salvarImagemFirebase(id, nome) {
-    const nomeImagem = id
-    const upload = storage.child(nomeImagem).put(imagemSelecionada)
-    upload.on("state_changed", function (snapshot) {
-
-    }, function (error) {
-        abrirModalAlerta("erro ao salvar imagem")
-        removerModalProgress()
-
-    }, function () {
-
-        upload.snapshot.ref.getDownloadURL().then(function (url_imagem) {
-
-            salvarDadosFirebase(id, nome, url_imagem)
-
-        })
-
-    })
-}
-
-//salvar dados no firebase - adicionar
-function salvarDadosFirebase(id, nome, url_imagem) {
-    const dados = {
-        id: id,
-        nome: nome,
-        url_imagem: url_imagem
-    }
-
-    bd.doc(id).set(dados).then(function () {
-        removerModalProgress()
-        limparCamposAdicionar()
-
-        abrirModalAlerta("Sucesso ao adicionar os dados")
-
-    }).catch(function (error) {
-        removerModalProgress()
-        abrirModalAlerta("erro ao adicionar os dados " + error)
-    })
-}
-
-//click imagem
-function clickImagemAdicionar() {
-    $("#imagemUploadAdicionar").click()
-}
-
-
-
-// ======= MODAL ALTERAR =========
-//limpando campos alterar
-function limparCamposAlterar() {
-    $("#imagemUploadAlterar").val("")
-    imagemSelecionada = null
-}
-
-//abrir modal alterar
-function abrirModalAlterar(dados) {
-    $("#modalAlterar").modal()
-    const id = document.getElementById("alterarID")
-    const nome = document.getElementById("alterarNome")
-    const imagem = document.getElementById("imagemAlterar")
-
-    id.innerText = dados.id
-    nome.value = dados.nome
-    imagem.src = dados.url_imagem
-    produtoSelecionadaAlterar = dados
-
-}
-
-//botão alterar
-function buttonAlterarValidarCampos() {
-    const id = document.getElementById("alterarID").innerHTML
-    const nome = document.getElementById("alterarNome").value
-
-    if (produtoSelecionadaAlterar.nome.trim() == nome.trim() && imagemSelecionada == null) {
-        abrirModalAlerta("Nenhuma informação foi alterada")
-    } 
-    else if (nome.trim() == "") {
-        abrirModalAlerta("Preencha os campos corretamente")
-    }
-     else if (imagemSelecionada != null) {
-        abrirModalProgress()
-        alterarImagemFirebase(id, nome)
-    } 
-    else {
-        abrirModalProgress()
-        alterarDadosFirebase(id, nome, produtoSelecionadaAlterar.url_imagem)
-    }
-}
-
-//alterar imagem firebase
-function alterarImagemFirebase(id, nome) {
-    const nomeImagem = id
-    const upload = storage.child(nomeImagem).put(imagemSelecionada)
-    upload.on("state_changed", function (snapshot) {
-
-    }, function (error) {
-        abrirModalAlerta("erro ao alterar a imagem")
-        removerModalProgress()
-
-    }, function () {
-
-        upload.snapshot.ref.getDownloadURL().then(function (url_imagem) {
-
-            alterarDadosFirebase(id, nome, url_imagem)
-
-        })
-
-    })
-}
-
-//alterar dados no firebase -  alterar
-function alterarDadosFirebase(id, nome, url_imagem) {
-    const dados = {
-        id: id,
-        nome: nome,
-        url_imagem: url_imagem
-    }
-
-    bd.doc(id).update(dados).then(function () {
-
-        $("#modalAlterar").modal("hide")
-        removerModalProgress()
-        limparCamposAlterar()
-        abrirModalAlerta("Sucesso ao alterar os dados")
-
-    }).catch(function (error) {
-        removerModalProgress()
-        abrirModalAlerta("erro ao alterar os dados " + error)
-    })
-}
-
 
 
 //================ TRATAMENTO COM IMAGENS ==================
@@ -351,6 +227,224 @@ function inserirImagem(imagem, file) {
         reader.readAsDataURL(file)
     }
 }
+
+
+
+
+//================ MODAL ADICIONAR ======================
+//abrir modal
+function abrirModalAdicionar() {
+    $("#modalAdicionar").modal()
+}
+
+//limpando compos modal adicionar
+function limparCamposAdicionar() {
+    document.getElementById("adicionarID").value = ""
+    document.getElementById("adicionarNome").value = ""
+    document.getElementById("adicionarValor").value = ""
+    document.getElementById("adicionarDescricao").value = ""
+    document.getElementById("imagemAdicionar").src = "#"
+    $("#imagemUploadAdicionar").val("")
+    imagemSelecionada = null
+}
+
+//botão adicionar
+function buttonAdicionarValidarCampos() {
+    const id = document.getElementById("adicionarID").value
+    const nome = document.getElementById("adicionarNome").value
+    const valor = document.getElementById("adicionarValor").value
+    
+    const categoria = document.getElementById("adicionarDropdown").value
+    const categoria_id = categoriasIds.get(categoria)
+
+    const descricao = document.getElementById("adicionarDescricao").value
+    
+    const possui_adicional = document.getElementById("adicionarRadioSim").checked
+    
+
+
+    if (keyLista.indexOf(id) > -1) {
+        abrirModalAlerta("Este ID ja foi cadastrado, tente outro")
+    } 
+    else if (nome.trim() == "" || id.trim() == "" || valor.trim() == ""|| descricao.trim() == "" ){
+        abrirModalAlerta("ID e nome são obrigatórios")
+    } else if (imagemSelecionada == null) {
+        abrirModalAlerta("Insira a imagem do produto")
+    } else {
+        abrirModalProgress()
+        salvarImagemFirebase(id, nome, valor, categoria_id, descricao, possui_adicional)
+    }
+}
+
+//adicionando imagem firebase
+function salvarImagemFirebase(id, nome, valor, categoria_id, descricao, possui_adicional) {
+    const nomeImagem = id
+    const upload = storage.child(nomeImagem).put(imagemSelecionada)
+    upload.on("state_changed", function (snapshot) {
+
+    }, function (error) {
+        abrirModalAlerta("erro ao salvar imagem")
+        removerModalProgress()
+
+    }, function () {
+
+        upload.snapshot.ref.getDownloadURL().then(function (url_imagem) {
+
+            salvarDadosFirebase(id, nome, valor, categoria_id, descricao, possui_adicional, url_imagem)
+
+        })
+
+    })
+}
+
+//salvar dados no firebase - adicionar
+function salvarDadosFirebase(id, nome, valor, categoria_id, descricao, possui_adicional, url_imagem) {
+    const dados = {
+        id: id,
+        nome: nome,
+        valor: valor,
+        categoria_id: categoria_id,
+        descricao: descricao,
+        possui_adicional: possui_adicional,
+        url_imagem: url_imagem
+    }
+
+    bd.doc(id).set(dados).then(function () {
+        removerModalProgress()
+        limparCamposAdicionar()
+
+        abrirModalAlerta("Sucesso ao adicionar os dados")
+
+    }).catch(function (error) {
+        removerModalProgress()
+        abrirModalAlerta("erro ao adicionar os dados " + error)
+    })
+}
+
+//click imagem
+function clickImagemAdicionar() {
+    $("#imagemUploadAdicionar").click()
+}
+
+
+
+// ================== MODAL ALTERAR =====================
+//limpando campos alterar
+function limparCamposAlterar() {
+    $("#imagemUploadAlterar").val("")
+    imagemSelecionada = null
+}
+
+//abrir modal alterar
+function abrirModalAlterar(dados) {
+    $("#modalAlterar").modal()
+    const id = document.getElementById("alterarID")
+    const nome = document.getElementById("alterarNome")
+    const valor = document.getElementById("alterarValor")
+    const dropDown = document.getElementById("alterarDropdown")
+    const descricao = document.getElementById("alterarDescricao")
+    const radioButtonSim = document.getElementById("alterarRadioSim")
+    const radioButtonSim = document.getElementById("alterarRadioNao")
+    const imagem = document.getElementById("imagemAlterar")
+
+    id.innerText = dados.id
+    nome.value = dados.nome
+    valor.value = dados.valor
+    dropDown.value = categoriasNomes.get(dados.categoria_id)
+    descricao.value = dados.descricao
+    imagem.src = dados.url_imagem
+    
+    if(dados.possui_adicional){
+        radioButtonSim.checked = true
+    }else{
+        radioButtonNao.checked = true
+    }
+
+    produtoSelecionadaAlterar = dados
+
+}
+
+//botão alterar
+function buttonAlterarValidarCampos() {
+    const id = document.getElementById("alterarID").innerHTML
+    const nome = document.getElementById("alterarNome").value
+    const valor = document.getElementById("alterarValor").value
+    
+    const categoria = document.getElementById("alterarDropdown").value
+    const categoria_id = categoriasIds.get(categoria)
+
+    const descricao = document.getElementById("alterarDescricao").value
+    const possui_adicional = document.getElementById("alterarRadioSim").checked
+
+    if (produtoSelecionadaAlterar.nome.trim() == nome.trim() && 
+        produtoSelecionadaAlterar.valor.trim() == valor.trim() &&
+        produtoSelecionadaAlterar.categoria_id == categoria_id &&
+        produtoSelecionadaAlterar.descricao.trim() == descricao.trim() && 
+        produtoSelecionadaAlterar.possui_adicional == possui_adicional &&
+        imagemSelecionada == null) {
+        abrirModalAlerta("Nenhuma informação foi alterada")
+    } 
+    else if (nome.trim() == "" || valor.trim() == ""|| descricao.trim() == "" ) {
+        abrirModalAlerta("Preencha os campos corretamente")
+    }
+     else if (imagemSelecionada != null) {
+        abrirModalProgress()
+        alterarImagemFirebase(id, nome, valor, categoria_id, descricao, possui_adicional)
+    } 
+    else {
+        abrirModalProgress()
+        alterarDadosFirebase(id, nome, valor, categoria_id, descricao, possui_adicional, produtoSelecionadaAlterar.url_imagem)
+    }
+}
+
+//alterar imagem firebase
+function alterarImagemFirebase(id, nome, valor, categoria_id, descricao, possui_adicional) {
+    const nomeImagem = id
+    const upload = storage.child(nomeImagem).put(imagemSelecionada)
+    upload.on("state_changed", function (snapshot) {
+
+    }, function (error) {
+        abrirModalAlerta("erro ao alterar a imagem")
+        removerModalProgress()
+
+    }, function () {
+
+        upload.snapshot.ref.getDownloadURL().then(function (url_imagem) {
+
+            alterarDadosFirebase(id, nome, valor, categoria_id, descricao, possui_adicional, url_imagem)
+
+        })
+
+    })
+}
+
+//alterar dados no firebase -  alterar
+function alterarDadosFirebase(id, nome, valor, categoria_id, descricao, possui_adicional, url_imagem) {
+    const dados = {
+        id: id,
+        nome: nome,
+        valor: valor,
+        categoria_id: categoria_id,
+        descricao: descricao,
+        possui_adicional: possui_adicional,
+        url_imagem: url_imagem
+    }
+
+    bd.doc(id).update(dados).then(function () {
+
+        $("#modalAlterar").modal("hide")
+        removerModalProgress()
+        limparCamposAlterar()
+        abrirModalAlerta("Sucesso ao alterar os dados")
+
+    }).catch(function (error) {
+        removerModalProgress()
+        abrirModalAlerta("erro ao alterar os dados " + error)
+    })
+}
+
+
+
 
 
 
@@ -460,8 +554,10 @@ $("#maxRows").on("change", function () {
 
     let rows = maxRows + 1
 
-    if (tr.length > rows) {
-        let numpage = Math.ceil(tr.length / rows)
+    let totalRows = tr.length
+
+    if (totalRows > rows) {
+        let numpage = Math.ceil(totalRows / rows)
         for (let i = 1; i <= numpage; i++) {
             $("#pagination").append('<li class="page-item"><a class="page-link" href="#">' + i + '</a></li>')
         }
@@ -472,9 +568,7 @@ $("#maxRows").on("change", function () {
 
         i = 1
         $("#tabelaProduto tr:gt(0)").each(function () {
-            if (i > (rows * numpage)) {
-                $(this).hide()
-            } else if (i <= ((rows * numpage) - rows)) {
+            if (i > (rows * numpage) || i <= ((rows * numpage) - rows)) {
                 $(this).hide()
             } else {
                 $(this).show()
@@ -525,11 +619,11 @@ function ordemCrescente() {
     let tr = tabela.getElementsByTagName('tr')
 
     for (let i = 0; i < tr.length - 1; i++) {
-        for (let j = 0; j < tr.length - (i - 1); j++) {
+        for (let j = 0; j < tr.length - (i + 1); j++) {
             let informacao1 = tr[j].getElementsByTagName("td")[0].textContent
             let informacao2 = tr[j + 1].getElementsByTagName("td")[0].textContent
 
-            if (Number(informacao1) > Number(informacao2)) {
+            if (Number(informacao1) < Number(informacao2)) {
                 //if (informacao1 > informacao2) {
                 tabela.insertBefore(tr.item(j + 1), tr.item(j))
 

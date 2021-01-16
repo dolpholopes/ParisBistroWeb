@@ -125,6 +125,70 @@ function criarBotoesTabela(colunaAcoes, dados) {
 }
 
 
+
+//================ TRATAMENTO COM IMAGENS ==================
+
+// Click adcionar imagem
+function clickImagemAdicionar() {
+    $("#imagemUploadAdicionar").click()
+}
+
+$("#imagemUploadAdicionar").on("change", function (event) {
+    const imagem = document.getElementById("imagemAdicionar")
+    compactarImagem(event, imagem)
+})
+
+
+
+// Click alterar imagem
+function clickAlterarImagem() {
+    $("#imagemUploadAlterar").click()
+}
+
+$("#imagemUploadAlterar").on("change", function (event) {
+    const imagem = document.getElementById("imagemAlterar")
+    compactarImagem(event, imagem)
+})
+
+
+
+// tratando a imagem
+function compactarImagem(event, imagem) {
+    const compress = new Compress()
+    const files = [...event.target.files]
+    compress.compress(files, {
+        size: 4, // the max size in MB, defaults to 2MB
+        quality: 0.75, // the quality of the image, max is 1,
+        maxWidth: 1920, // the max width of the output image, defaults to 1920px
+        maxHeight: 1920, // the max height of the output image, defaults to 1920px
+        resize: true // defaults to true, set false if you do not want to resize the image width and height
+    }).then((data) => {
+
+        if (data[0] != null) {
+            const image = data[0]
+            const file = Compress.convertBase64ToFile(image.data, image.ext)
+            imagemSelecionada = file
+            inserirImagem(imagem, file)
+        }
+
+    })
+}
+
+function inserirImagem(imagem, file) {
+    imagem.file = file
+    if (imagemSelecionada != null) {
+        const reader = new FileReader()
+        reader.onload = (function (img) {
+            return function (e) {
+                img.src = e.target.result
+            }
+        })(imagem)
+        reader.readAsDataURL(file)
+    }
+}
+
+
+
 //================ MODAL ADICIONAR ======================
 //abrir modal
 function abrirModalAdicionar() {
@@ -288,70 +352,6 @@ function alterarDadosFirebase(id, nome, url_imagem) {
         abrirModalAlerta("erro ao alterar os dados " + error)
     })
 }
-
-
-
-//================ TRATAMENTO COM IMAGENS ==================
-
-// Click adcionar imagem
-function clickImagemAdicionar() {
-    $("#imagemUploadAdicionar").click()
-}
-
-$("#imagemUploadAdicionar").on("change", function (event) {
-    const imagem = document.getElementById("imagemAdicionar")
-    compactarImagem(event, imagem)
-})
-
-
-
-// Click alterar imagem
-function clickAlterarImagem() {
-    $("#imagemUploadAlterar").click()
-}
-
-$("#imagemUploadAlterar").on("change", function (event) {
-    const imagem = document.getElementById("imagemAlterar")
-    compactarImagem(event, imagem)
-})
-
-
-
-// tratando a imagem
-function compactarImagem(event, imagem) {
-    const compress = new Compress()
-    const files = [...event.target.files]
-    compress.compress(files, {
-        size: 4, // the max size in MB, defaults to 2MB
-        quality: 0.75, // the quality of the image, max is 1,
-        maxWidth: 1920, // the max width of the output image, defaults to 1920px
-        maxHeight: 1920, // the max height of the output image, defaults to 1920px
-        resize: true // defaults to true, set false if you do not want to resize the image width and height
-    }).then((data) => {
-
-        if (data[0] != null) {
-            const image = data[0]
-            const file = Compress.convertBase64ToFile(image.data, image.ext)
-            imagemSelecionada = file
-            inserirImagem(imagem, file)
-        }
-
-    })
-}
-
-function inserirImagem(imagem, file) {
-    imagem.file = file
-    if (imagemSelecionada != null) {
-        const reader = new FileReader()
-        reader.onload = (function (img) {
-            return function (e) {
-                img.src = e.target.result
-            }
-        })(imagem)
-        reader.readAsDataURL(file)
-    }
-}
-
 
 
 //===================================== MODAL REMOVER =================================
@@ -525,11 +525,11 @@ function ordemCrescente() {
     let tr = tabela.getElementsByTagName('tr')
 
     for (let i = 0; i < tr.length - 1; i++) {
-        for (let j = 0; j < tr.length - (i - 1); j++) {
+        for (let j = 0; j < tr.length - (i + 1); j++) {
             let informacao1 = tr[j].getElementsByTagName("td")[0].textContent
             let informacao2 = tr[j + 1].getElementsByTagName("td")[0].textContent
 
-            if (Number(informacao1) > Number(informacao2)) {
+            if (Number(informacao1) < Number(informacao2)) {
                 //if (informacao1 > informacao2) {
                 tabela.insertBefore(tr.item(j + 1), tr.item(j))
 

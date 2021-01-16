@@ -168,7 +168,8 @@
                         <tr>
                             <th class="th-sm" onclick="ordenarId()"> ID <i style="float: right;"
                                     class="fas fa-sort"></i></th>
-                            <th class="th-sm"> Nome </i></th>
+                            <th class="th-sm"> Nome </th>
+                            <th class="th-sm"> Valor </th>
                             <th class="th-sm"> Ações </th>
                         </tr>
                     </thead>
@@ -213,7 +214,36 @@
                         <div class="form-group">
                             <label for="adicionarValor"> <span class="glyphicon glyphicon-eye-open"> Valor: </span>
                             </label>
-                            <input type="text" class="form-control" id="adicionarValor" />
+                            <input type="number" class="form-control" id="adicionarValor" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="adicionarDropdown"> <span class="glyphicon glyphicon-eye-open"> Categoria: </span>
+                            </label>
+                            <br>
+                            <select style="width: 300px;" id="adicionarDropdown"></select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="adicionarDescricao"> <span class="glyphicon glyphicon-eye-open"> Descrição produto: </span>
+                            </label>
+                            <textarea rows="3" cols="40" style="max-width: 100%;" id="adicionarDescricao"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="adicionarDescricao"> <span class="glyphicon glyphicon-eye-open"> Possui adicional?: </span>
+                            </label>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="nameAdicionarRadio" id="adicionarRadioNao"  checked>
+                                <label class="form-check-label"> Não possui adicional</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="nameAdicionarRadio" id="adicionarRadioSim">
+                                <label class="form-check-label"> Sim possui adicional</label>
+                            </div>
+
                         </div>
 
                         <label>
@@ -253,6 +283,41 @@
                         <div class="form-group">
                             <label for="alterarNome"> <span class="glyphicon glyphicon-eye-open"> Nome: </span> </label>
                             <input type="text" class="form-control" id="alterarNome" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="alterarValor"> <span class="glyphicon glyphicon-eye-open"> Valor: </span>
+                            </label>
+                            <input type="number" class="form-control" id="alterarValor" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="alterarDropdown"> <span class="glyphicon glyphicon-eye-open"> Categoria: </span>
+                            </label>
+                            <br>
+                            <select style="width: 300px;" id="alterarDropdown"></select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="alterarDescricao"> <span class="glyphicon glyphicon-eye-open"> Descrição produto: </span>
+                            </label>
+                            <textarea rows="3" cols="40" style="max-width: 100%;" id="alterarDescricao"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="alterarDescricao"> <span class="glyphicon glyphicon-eye-open"> Possui adicional?: </span>
+                            </label>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="nameAdicionarRadio" id="alterarRadioNao"  checked>
+                                <label class="form-check-label"> Não possui adicional</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="nameAdicionarRadio" id="alterarRadioSim">
+                                <label class="form-check-label"> Sim possui adicional</label>
+                            </div>
+
                         </div>
 
                         <label>
