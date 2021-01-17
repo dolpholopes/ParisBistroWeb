@@ -127,65 +127,138 @@
         <!-- Conteudo da pagina  -->
         <div id="content">
 
-            <button type="button" id="sidebarCollapse" class="btn btn-info">
-                <i class="fas fa-align-left"></i>
-            </button> <br>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
 
-                    <div class="form-group">
-                        <p style="font-family: 'Lobster'; font-size: 35px; color: #448ed3;"> Categoria </p>
-                    </div>
-                </div>
-            </nav>
 
-            <div class="card-body">
-                <button type="button" id="addCategoria" class="btn btn-info" onclick="abrirModalAdicionar()">
-                    <i class="fas fa-plus"></i>
-                    Adicionar Categoria
-                </button>
-            </div>
 
-            <div style="margin: 0 auto; float: right;">
-                <input type="text" id="pesquisar0" onkeyup="pesquisar()" placeholder="Pesquisar ID ..."> &nbsp
-                <input type="text" id="pesquisar1" onkeyup="pesquisarNome()" placeholder="Pesquisar Nome ..."> &nbsp
+			<!---  parte superior---------->
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-                <select name="state" id="maxRows" style="height: 30; margin-right: 15;">
-                    <option value="100"> Mostrar Todos</option>
-                    <option value="1"> 5</option>
-                    <option value="10"> 10</option>
-                    <option value="14"> 15</option>
-                    <option value="20"> 20</option>
-                </select>
 
-                <br>
-                <br>
-            </div>
+				<div class="container-fluid">
 
-            <div class="table-responsive col-md-12">
-                <table class="table table-striped table-bordered" id="tabelaCategoria" cellspacing="0" cellpadding="0">
-                    <thead>
-                        <tr>
-                            <th class="th-sm" onclick="ordenarId()"> ID <i style="float: right;"
-                                    class="fas fa-sort"></i></th>
-                            <th class="th-sm"> Nome </i></th>
-                            <th class="th-sm"> Ações </th>
-                        </tr>
-                    </thead>
-                    <tbody>
 
-                    </tbody>
-                </table>
+					<button type="button" id="sidebarCollapse" class="btn btn-info">
 
-                <div class="pagination">
-                    <nav>
-                        <ul class="pagination" id="pagination"></ul>
+						<i class="fas fa-align-left"></i>
+					</button>
 
-                    </nav>
-                </div>
-            </div>
+					<div class="form-group">
 
-        </div>
+						<p style="font-family: 'Lobster'; font-size: 35px; color: #448ed3 "> Categoria</p>
+
+					</div>
+					<br>
+				</div>
+
+			</nav>
+
+
+
+			<!---  botao adicionar---------->
+
+			<div class="card-body">
+
+
+				<button type="button" class="btn btn-primary mb-1" onclick="abrirModalAdicionar()">
+
+
+					<i class="fas fa-plus"></i>
+
+					Add Categoria
+				</button>
+			</div>
+
+
+
+			<!---  pesquisa---------->
+
+			<div style="margin: 0 auto; float: right;">
+
+
+
+				<input type="text" id="pesquisar0" onkeyup="pesquisar(0)" placeholder=" Pesquisar ID ...">
+
+				&nbsp
+				&nbsp
+				<input type="text" id="pesquisar1" onkeyup="pesquisar(1)" placeholder=" Pesquisar Nome ...">
+
+				&nbsp
+				&nbsp
+
+				<select name="state" id="maxRows" style="height: 30; margin-right: 15;">
+
+					<option value="100"> Motrar Todos</option>
+					<option value="5"> 5</option>
+					<option value="10"> 10</option>
+					<option value="15"> 15</option>
+					<option value="20"> 20</option>
+
+				</select>
+
+				<br>
+				<br>
+
+			</div>
+
+
+
+
+
+			<!---  tabela ---------->
+
+
+			<div class="table-responsive col-md-12">
+
+
+				<table class="table table-striped table-bordered " id="tabelaCategoria" cellspacing="0" cellpadding="0">
+
+
+
+					<!---  cabeçalho da tabela ---------->
+
+					<thead>
+
+
+						<tr>
+
+							<th class="th-sm"  onclick="ordenarId()" > ID <i style="float: right;" class="fas fa-sort"></i> </th>
+							<th class="th-sm"> Nome</th>
+							<th class="th-sm"> Ações </th>
+
+						</tr>
+
+					</thead>
+
+					<tbody>
+
+				
+				
+
+						<!---  conteudo da tabela ---------->
+
+					</tbody>
+
+
+					
+
+				</table>
+
+				<!---  paginacao---------->
+
+				<div class="pagination">
+
+					<nav>
+						<ul class="pagination " id="pagination" ></ul>
+					</nav>
+
+				</div>
+
+			</div>
+
+
+
+
+		</div>
     </div>
 
 
@@ -215,7 +288,7 @@
                             <input type="file" class="upload-group" id="imagemUploadAdicionar" />
                         </label>
                         <br>
-                        <img class="razer" id="imagemAdicionar" width="80" height="80" onclick="clickImagemAdicionar()">
+                        <img class="razer" id="imagemAdicionar" width="80" height="80" onclick="clickAdicionarImagem()">
                         <br><br>
 
                         <button type="button" class="btn btn-success btn-block"
