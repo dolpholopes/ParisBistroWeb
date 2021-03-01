@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+        <title>Paris Bistro - Adicionais</title>
+    
+        <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+            integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <!-- Our Custom CSS -->
+        <link rel="stylesheet" href="css/style.css">
+    
+        <!-- Font Awesome JS -->
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+            integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+            crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+            integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+            crossorigin="anonymous"></script>
+        <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-add-css="false"></script>
+        <link href="https://use.fontawesome.com/releases/v5.15.1/css/svg-with-js.css" rel="stylesheet" />
+    
+    
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    
+    
+        <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-storage.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-auth.js"></script>
 
-    <title>Paris Bistro - Adicionais</title>
-
-    <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
-        integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
-
-    <!-- Font Awesome JS -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
-        integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
-        crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
-        integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
-        crossorigin="anonymous"></script>
-    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-add-css="false"></script>
-    <link href="https://use.fontawesome.com/releases/v5.15.1/css/svg-with-js.css" rel="stylesheet" />
-
-
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-
-
-    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-storage.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-firestore.js"></script>
-
-    <script src="https://compressjs.herokuapp.com/compress.js"></script>
-</head>
+        <script src="js/logado.js"></script>
+    
+        <script src="https://compressjs.herokuapp.com/compress.js"></script>
+    </head>
 
 <body>
 
@@ -50,9 +53,9 @@
             <ul class="list-unstyled components">
 
                 <li class="treeview">
-                    <a href="home.html" aria-expanded="false" class="dropdown-toggle">
+                    <a href="pedidos.html" aria-expanded="false" class="dropdown-toggle">
                         <i class="fas fa-home"></i>
-                        Home
+                        Pedidos
                     </a>
 
                 </li>
@@ -98,6 +101,9 @@
                         <li>
                             <a href="app.html">Gerenciar app</a>
                         </li>
+                        <li>
+                            <a href="notificacao.html">Enviar notificação</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -118,7 +124,7 @@
                     </a>
                     <ul class="collapse list-unstyled" id="logoutSubmenu">
                         <li>
-                            <a href="#">Sair</a>
+                            <a href="#" onclick="deslogar()">Sair</a>
                         </li>
                     </ul>
                 </li>
@@ -129,17 +135,17 @@
         <!-- Conteudo da pagina  -->
         <div id="content">
 
-            <button type="button" id="sidebarCollapse" class="btn btn-info">
-                <i class="fas fa-align-left"></i>
-            </button> <br>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-
-                    <div class="form-group">
-                        <p style="font-family: 'Lobster'; font-size: 35px; color: #448ed3;"> Adicional </p>
-                    </div>
-                </div>
-            </nav>
+				<div class="container-fluid">
+					<button type="button" id="sidebarCollapse" class="btn btn-info">
+						<i class="fas fa-align-left"></i>
+					</button>
+					<div class="form-group">
+						<p style="font-family: 'Lobster'; font-size: 35px; color: #448ed3 "> Adicionais</p>
+					</div>
+					<br>
+				</div>
+			</nav>
 
             <div class="card-body">
                 <button type="button" id="addAdicional" class="btn btn-info" onclick="abrirModalAdicionar()">

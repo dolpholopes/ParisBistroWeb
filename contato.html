@@ -17,6 +17,9 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
     <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-add-css="false"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-auth.js"></script>
+
+    <script src="js/logado.js"></script>
     <link href="https://use.fontawesome.com/releases/v5.15.1/css/svg-with-js.css" rel="stylesheet" />
 
 </head>
@@ -34,9 +37,9 @@
             <ul class="list-unstyled components">
                 
                 <li class="treeview">
-                    <a href="home.html" aria-expanded="false" class="dropdown-toggle">
+                    <a href="pedidos.html" aria-expanded="false" class="dropdown-toggle">
                         <i class="fas fa-home"></i>
-                        Home
+                        Pedidos
                     </a>
                     
                 </li>
@@ -82,6 +85,9 @@
                         <li>
                             <a href="app.html">Gerenciar app</a>
                         </li>
+                        <li>
+                            <a href="notificacao.html">Enviar notificação</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="treeview active">
@@ -102,7 +108,7 @@
                     </a>
                     <ul class="collapse list-unstyled" id="logoutSubmenu">
                         <li>
-                            <a href="#">Sair</a>
+                            <a href="#" onclick="deslogar()">Sair</a>
                         </li>
                     </ul>
                 </li>

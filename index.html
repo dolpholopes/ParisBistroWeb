@@ -1,26 +1,109 @@
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device=width, initial=scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="IE-edge">
-        
-        <title>Paris Bistro</title>
-        
-        <link rel="icon" type="image/png" href="images/imagem.png">
 
-        <link rel="stylesheet" href="css/style.css">
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-    </head>
+<head>
 
-    <body>
-        
-        
-        
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
 
-    </body>
+
+    <title> JAF.Apps </title>
+
+    <link rel="icon" type="image/png" href="images/parisbistro2.png">
+
+
+    <!--------------------  CSS  ------------------------->
+    <link rel="stylesheet" href="css/stylelogin.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!--------------------  bootstrap ------------------------->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+    <!--------------------  fontawesome ------------------------->
+    <script src="https://use.fontawesome.com/releases/v5.11.2/js/all.js" data-auto-add-css="false"></script>
+    <link href="https://use.fontawesome.com/releases/v5.11.2/css/svg-with-js.css" rel="stylesheet" />
+
+    <!--------------------  google fonts ------------------------->
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+
+
+    <!--------------------  firebase ------------------------->
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-auth.js"></script>
+
+</head>
+
+<body>
+    <!--------------------  LOGIN  ------------------------->
+
+    <div class="wrap" style="margin: 0 auto; float: center">
+        <br><br>
+        <img src="images/parisbistro2.png" style="max-width: 100%;" />
+        <div>
+            <input style="font-family: 'Lato'; " type="email" placeholder="E-mail" id="email" />
+            <div class="bar">
+                <i></i>
+            </div>
+
+            <input style="font-family: 'Lato'; " type="password" placeholder="Senha" id="senha" />
+            <div class="bar">
+                <i></i>
+            </div>
+            <br>
+
+            <button style="background:  rgb(0,0,0); color: #fff;" onclick="login()">Entrar</button>
+        </div>
+    </div>
+
+
+
+    <div>
+        <!--------------------  MODAL ALERTA  ------------------------->
+        <div class="modal fade" id="modalAlerta" style="overflow-y:scroll ;" tabindex="-1" role="dialog">
+
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="padding: 35px 50px;">
+                        <h4 style="color: #448ed3"> Alerta</h4>
+                    </div>
+                    <div class="modal-body" style="padding: 40px 50px;">
+                        <label id="alertaMenssagem"> Erro ao Tentar abrir </label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Ok
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--------------------  MODAL PROGRESS  ------------------------->
+        <div class="modal fade" id="modalProgress" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-center" style="top: 50%; transform: translateY(-50%);">
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border text-primary" style="width: 5rem; height: 5rem;" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/login.js"></script>
+</body>
+
 </html>

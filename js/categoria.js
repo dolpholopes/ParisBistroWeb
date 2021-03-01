@@ -389,7 +389,26 @@ function abrirModalRemover(dados) {
 //------------ click em botao de SIM na modal de remover
 function removerCategoria() {
 	abrirModalProgress()
-	removerImagemFirebase()
+	//removerImagemFirebase()
+	consultarProdutos()
+}
+
+function consultarProdutos(){
+	const id = categoriaSelecionadaRemover.id
+	const bdProdutos = firebase.firestore().collection("produtos");
+
+	bdProdutos.where("categoria_id","==",id).get().then(function(query){
+		
+		const resultado = query.docs.length
+
+		if(resultado == 0){
+			abrirModalProgress()
+			removerImagemFirebase()
+		}
+		else{
+			abrirModalAlerta("Existem produtos associados a essa categoria - impossivel de remover enquanto estiverem associados")
+		}
+	})
 }
 
 
