@@ -142,11 +142,11 @@
                 <!---  parte superior---------->
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <div class="container-fluid">
-                        <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <button type="button" id="sidebarCollapse" style="background-color: black;" class="btn btn-dark">
                             <i class="fas fa-align-left"></i>
                         </button>
                         <div class="form-group">
-                            <p style="font-family: 'Lobster'; font-size: 35px; color: #448ed3 "> Pedidos</p>
+                            <p style="font-family: 'Lobster'; font-size: 35px; color: #000000 "> Pedidos</p>
                         </div>
                         <br>
                     </div>
@@ -227,7 +227,7 @@
 				<div class="modal-content">
 					<!----- cabeçalho  ------------->
 					<div class="modal-header" style="padding: 35px 50px;">
-						<h4 style="color: #448ed3"> Dados Cliente</h4>
+						<h4 style="color: #000000"> Dados Cliente</h4>
 					</div>
 
 					<!----- corpo  ------------->
@@ -247,11 +247,11 @@
 								<label type="text" class="form-control" id="clienteContato"></label>
 						</div>
 
-						<button type="button" class="btn btn-danger btn-default float-right" data-dismiss="modal" > Ok </button>
+						<button type="button" style="background-color: black;" class="btn btn-dark btn-default float-right" data-dismiss="modal" > Ok </button>
                         
                         <div>
 							<br><br><br>
-							<h4 style="color:#448ed3"> Enviar Notificação</h4>
+							<h4 style="color:#000000"> Enviar Notificação</h4>
 							<br>
 						</div>
 	
@@ -265,7 +265,7 @@
 								<input type="text" class="form-control" id="clienteMensagemNotificacao">
 						</div>
 
-						<button type="button" class="btn btn-success  btn-block"  onclick="validarCamposNotificação()" > Enviar Notificação </button>
+						<button type="button" style="background-color: black;" class="btn btn-dark  btn-block"  onclick="validarCamposNotificação()" > Enviar Notificação </button>
 				
 					</div>
 				</div>
@@ -279,7 +279,7 @@
 				<div class="modal-content">
 					<!----- cabeçalho  ------------->
 					<div class="modal-header" style="padding: 35px 50px;">
-						<h4 style="color: #448ed3"> Dados Pedido</h4>
+						<h4 style="color: #000000"> Dados Pedido</h4>
 					</div>
 
 					<!----- corpo  ------------->
@@ -303,7 +303,7 @@
                             <label > <span class="glyphicon glyphicon-eye-open"> Data/Hora </span> </label>
                             <label type="text" class="form-control" id="pedidoData"></label>
                     </div>
-						<button type="button" class="btn btn-danger btn-default float-right" data-dismiss="modal" > Ok </button>
+						<button type="button" style="background-color: black;" class="btn btn-dark btn-default float-right" data-dismiss="modal" > Ok </button>
                     </div>
                     
 				</div>
@@ -317,13 +317,13 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header" style="padding: 35px 50px;">
-                            <h4 style="color: #448ed3;"> Finalizar Pedido </h4>
+                            <h4 style="color: #000000;"> Finalizar Pedido </h4>
                         </div>
                         <div class="modal-body" style="padding: 40px 50px;">
                             Deseja finalizar o pedido?
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" onclick="finalizarPedido()">Sim</button> &nbsp
+                            <button type="button" style="background-color: black;" class="btn btn-dark" onclick="finalizarPedido()">Sim</button> &nbsp
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                         </div>
                     </div>
@@ -336,13 +336,13 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header" style="padding: 35px 50px;">
-                            <h4 style="color: #448ed3;"> Alerta </h4>
+                            <h4 style="color: #000000;"> Alerta </h4>
                         </div>
                         <div class="modal-body" style="padding: 40px 50px;">
                             <label id="alertaMenssagem"></label>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                            <button type="button" style="background-color: black;" class="btn btn-dark" data-dismiss="modal">OK</button>
                         </div>
                     </div>
                 </div>

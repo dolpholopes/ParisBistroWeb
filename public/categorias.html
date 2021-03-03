@@ -140,11 +140,11 @@
 			<!---  parte superior---------->
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<div class="container-fluid">
-					<button type="button" id="sidebarCollapse" class="btn btn-info">
+					<button type="button" id="sidebarCollapse" style="background-color: black;" class="btn btn-dark">
 						<i class="fas fa-align-left"></i>
 					</button>
 					<div class="form-group">
-						<p style="font-family: 'Lobster'; font-size: 35px; color: #448ed3 "> Categoria</p>
+						<p style="font-family: 'Lobster'; font-size: 35px; color: #000000 "> Categoria</p>
 					</div>
 					<br>
 				</div>
@@ -157,12 +157,12 @@
 			<div class="card-body">
 
 
-				<button type="button" class="btn btn-primary mb-1" onclick="abrirModalAdicionar()">
+				<button type="button" class="btn btn-dark mb-1" style="background-color: black;" onclick="abrirModalAdicionar()">
 
 
 					<i class="fas fa-plus"></i>
 
-					Add Categoria
+					Nova Categoria
 				</button>
 			</div>
 
@@ -267,7 +267,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header" style="padding: 35px 50px;">
-                        <h4 style="color: #448ed3;"> Adicionar Categoria </h4>
+                        <h4 style="color: #000000;"> Adicionar Categoria </h4>
                     </div>
                     <div class="modal-body" style="padding: 40px 50px;">
                         <div class="form-group">
@@ -289,7 +289,7 @@
                         <img class="razer" id="imagemAdicionar" width="80" height="80" onclick="clickAdicionarImagem()">
                         <br><br>
 
-                        <button type="button" class="btn btn-success btn-block"
+                        <button type="button" style="background-color: black;" class="btn btn-dark btn-block"
                             onclick="buttonAdicionarValidarCampos()">Salvar</button>
 
                     </div>
@@ -307,7 +307,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header" style="padding: 35px 50px;">
-                        <h4 style="color: #448ed3;"> Alterar Categoria </h4>
+                        <h4 style="color: #000000;"> Alterar Categoria </h4>
                     </div>
                     <div class="modal-body" style="padding: 40px 50px;">
                         <div class="form-group">
@@ -328,7 +328,7 @@
                         <img class="razer" id="imagemAlterar" width="80" height="80" onclick="clickAlterarImagem()">
                         <br><br>
 
-                        <button type="button" class="btn btn-success btn-block"
+                        <button type="button" style="background-color: black;" class="btn btn-dark btn-block"
                             onclick="buttonAlterarValidarCampos()">Alterar</button>
 
                     </div>
@@ -346,13 +346,13 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header" style="padding: 35px 50px;">
-                        <h4 style="color: #448ed3;"> Remover Categoria </h4>
+                        <h4 style="color: #000000;"> Remover Categoria </h4>
                     </div>
                     <div class="modal-body" style="padding: 40px 50px;">
                         Deseja realmente remover esta categoria?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onclick="removerCategoria()">Sim</button> &nbsp
+                        <button type="button" style="background-color: black;" class="btn btn-dark" onclick="removerCategoria()">Sim</button> &nbsp
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
@@ -365,13 +365,13 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header" style="padding: 35px 50px;">
-                        <h4 style="color: #448ed3;"> Alerta </h4>
+                        <h4 style="color: #000000;"> Alerta </h4>
                     </div>
                     <div class="modal-body" style="padding: 40px 50px;">
                         <label id="alertaMenssagem"></label>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                        <button type="button"  style="background-color: black;" class="btn btn-dark" data-dismiss="modal">OK</button>
                     </div>
                 </div>
             </div>
