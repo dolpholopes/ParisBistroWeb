@@ -328,7 +328,7 @@ $("#maxRows").on("change", function () {
 		let numpage = Math.ceil(totalRows / rows)
 
 		for (let i = 1; i <= numpage; i++) {
-			$("#pagination").append(' <li class="page-item">   <a class="page-link" href="#" >' + i + '</a></li> ').show()
+			$("#pagination").append(' <li class="page-item-dark">   <a class="page-link" href="#" >' + i + '</a></li> ').show()
 		}
 	}
 
