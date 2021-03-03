@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
-        <title>Paris Bistro - Adicionais</title>
+        <title>Paris Bistro - Produtos</title>
     
         <!-- Bootstrap CSS CDN -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
@@ -28,36 +28,37 @@
         <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     
     
-        <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-storage.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-firestore.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-auth.js"></script>
+        <script src="/__/firebase/7.6.1/firebase-app.js"></script>
+        <script src="/__/firebase/7.6.1/firebase-storage.js"></script>
+        <script src="/__/firebase/7.6.1/firebase-firestore.js"></script>
+        <script src="/__/firebase/7.6.1/firebase-auth.js"></script>
+        <script src="/__/firebase/init.js"></script>
 
         <script src="js/logado.js"></script>
     
         <script src="https://compressjs.herokuapp.com/compress.js"></script>
+
+        
     </head>
 
 <body>
 
-
-    
     <div class="wrapper">
-        <!--MENU LATERAL ESQUERDO-->
+        <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
                 <h3>Painel Administrativo</h3>
-
+                <strong>M</strong>
             </div>
 
             <ul class="list-unstyled components">
-
+                
                 <li class="treeview">
                     <a href="pedidos.html" aria-expanded="false" class="dropdown-toggle">
                         <i class="fas fa-home"></i>
-                        Pedidos
+                        pedidos
                     </a>
-
+                    
                 </li>
                 <li class="treeview">
                     <a href="#categoriaSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -70,29 +71,29 @@
                         </li>
                     </ul>
                 </li>
-                <li class="treeview active">
+                <li class="treeview">
                     <a href="#adicionalSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fas fa-bacon"></i>
                         Adcionais
                     </a>
-                    <ul class="collapse show" id="adicionalSubmenu">
+                    <ul class="collapse list-unstyled" id="adicionalSubmenu">
                         <li>
                             <a href="adicionais.html">Gerenciar adicionais</a>
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li class="treeview active">
                     <a href="#produtoSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fas fa-hamburger"></i>
                         Produtos
                     </a>
-                    <ul class="collapse list-unstyled" id="produtoSubmenu">
+                    <ul class="collapse show" id="produtoSubmenu">
                         <li>
                             <a href="produtos.html">Gerenciar produtos</a>
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li class="treeview">
                     <a href="#appSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fas fa-mobile-alt"></i>
                         App
@@ -106,7 +107,7 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li class="treeview">
                     <a href="#suporteSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fas fa-question"></i>
                         Suporte
@@ -129,7 +130,7 @@
                     </ul>
                 </li>
             </ul>
-
+            
         </nav>
 
         <!-- Conteudo da pagina  -->
@@ -141,16 +142,16 @@
 						<i class="fas fa-align-left"></i>
 					</button>
 					<div class="form-group">
-						<p style="font-family: 'Lobster'; font-size: 35px; color: #448ed3 "> Adicionais</p>
+						<p style="font-family: 'Lobster'; font-size: 35px; color: #448ed3 "> Produtos</p>
 					</div>
 					<br>
 				</div>
 			</nav>
-
+           
             <div class="card-body">
-                <button type="button" id="addAdicional" class="btn btn-info" onclick="abrirModalAdicionar()">
+                <button type="button" id="addProduto" class="btn btn-info" onclick="abrirModalAdicionar()">
                     <i class="fas fa-plus"></i>
-                    Novo Adicional
+                    Novo Produto
                 </button>
             </div>
 
@@ -170,14 +171,13 @@
                 <br>
             </div>
 
-            <!-- TABELA-->
             <div class="table-responsive col-md-12">
-                <table class="table table-striped table-bordered" id="tabelaAdicional" cellspacing="0" cellpadding="0">
+                <table class="table table-striped table-bordered" id="tabelaProduto" cellspacing="0" cellpadding="0">
                     <thead>
                         <tr>
                             <th class="th-sm" onclick="ordenarId()"> ID <i style="float: right;"
                                     class="fas fa-sort"></i></th>
-                            <th class="th-sm"> Nome </i></th>
+                            <th class="th-sm"> Nome </th>
                             <th class="th-sm"> Valor </th>
                             <th class="th-sm"> Ações </th>
                         </tr>
@@ -199,15 +199,14 @@
     </div>
 
 
-    
+    <!-- MODAL ADICIONAR -->
     <div>
-        <!-- MODAL ADICIONAR -->
         <div class="modal fade" id="modalAdicionar" style="overflow-y: scroll ;" data-backdrop="static" tabindex="-1"
             role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header" style="padding: 35px 50px;">
-                        <h4 style="color: #448ed3;"> Novo Adicional </h4>
+                        <h4 style="color: #448ed3;"> Adicionar Produto </h4>
                     </div>
                     <div class="modal-body" style="padding: 40px 50px;">
                         <div class="form-group">
@@ -227,6 +226,43 @@
                             <input type="number" class="form-control" id="adicionarValor" />
                         </div>
 
+                        <div class="form-group">
+                            <label for="adicionarDropdown"> <span class="glyphicon glyphicon-eye-open"> Categoria: </span>
+                            </label>
+                            <br>
+                            <select style="width: 300px;" id="adicionarDropdown"></select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="adicionarDescricao"> <span class="glyphicon glyphicon-eye-open"> Descrição produto: </span>
+                            </label>
+                            <textarea rows="3" cols="40" style="max-width: 100%;" id="adicionarDescricao"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="adicionarDescricao"> <span class="glyphicon glyphicon-eye-open"> Possui adicional?: </span>
+                            </label>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="nameAdicionarRadio" id="adicionarRadioNao"  checked>
+                                <label class="form-check-label"> Não possui adicional</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="nameAdicionarRadio" id="adicionarRadioSim">
+                                <label class="form-check-label"> Sim possui adicional</label>
+                            </div>
+
+                        </div>
+
+                        <label>
+                            <span> Imagem: </span>
+                            <input type="file" class="upload-group" id="imagemUploadAdicionar" />
+                        </label>
+                        <br>
+                        <img class="razer" id="imagemAdicionar" width="80" height="80" onclick="clickAdicionarImagem()">
+                        <br><br>
+
                         <button type="button" class="btn btn-success btn-block"
                             onclick="buttonAdicionarValidarCampos()">Salvar</button>
 
@@ -245,7 +281,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header" style="padding: 35px 50px;">
-                        <h4 style="color: #448ed3;"> Alterar Adicional </h4>
+                        <h4 style="color: #448ed3;"> Alterar Produto </h4>
                     </div>
                     <div class="modal-body" style="padding: 40px 50px;">
                         <div class="form-group">
@@ -264,12 +300,50 @@
                             <input type="number" class="form-control" id="alterarValor" />
                         </div>
 
+                        <div class="form-group">
+                            <label for="alterarDropdown"> <span class="glyphicon glyphicon-eye-open"> Categoria: </span>
+                            </label>
+                            <br>
+                            <select style="width: 300px;" id="alterarDropdown"></select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="alterarDescricao"> <span class="glyphicon glyphicon-eye-open"> Descrição produto: </span>
+                            </label>
+                            <textarea rows="3" cols="40" style="max-width: 100%;" id="alterarDescricao"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="alterarDescricao"> <span class="glyphicon glyphicon-eye-open"> Possui adicional?: </span>
+                            </label>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="nameAdicionarRadio" id="alterarRadioNao"  checked>
+                                <label class="form-check-label"> Não possui adicional</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="nameAdicionarRadio" id="alterarRadioSim">
+                                <label class="form-check-label"> Sim possui adicional</label>
+                            </div>
+
+                        </div>
+
+                        <label>
+                            <span> Imagem: </span>
+                            <input type="file" class="upload-group" id="imagemUploadAlterar" />
+                        </label>
+                        <br>
+                        <img class="razer" id="imagemAlterar" width="80" height="80" onclick="clickAlterarImagem()">
+                        <br><br>
+
                         <button type="button" class="btn btn-success btn-block"
                             onclick="buttonAlterarValidarCampos()">Alterar</button>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" >Cancelar</button> &nbsp
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"
+                            onclick="limparCamposAlterar()">Cancelar</button> &nbsp
                     </div>
                 </div>
             </div>
@@ -281,13 +355,13 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header" style="padding: 35px 50px;">
-                        <h4 style="color: #448ed3;"> Remover Adicional </h4>
+                        <h4 style="color: #448ed3;"> Remover Produto </h4>
                     </div>
                     <div class="modal-body" style="padding: 40px 50px;">
-                        Deseja realmente remover esta adicional?
+                        Deseja realmente remover este produto?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onclick="removerAdicional()">Sim</button> &nbsp
+                        <button type="button" class="btn btn-primary" onclick="removerProduto()">Sim</button> &nbsp
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
@@ -339,7 +413,7 @@
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
 
-    <script src="js/adicional.js"></script>
+    <script src="js/produto.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {

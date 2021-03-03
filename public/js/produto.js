@@ -1,32 +1,57 @@
-const firebaseConfig = {
-    apiKey: "AIzaSyDRIp4lGgH_chsQK0f064-yh19AuBeRgQo",
-    authDomain: "paris-bistro-6b97e.firebaseapp.com",
-    databaseURL: "https://paris-bistro-6b97e.firebaseio.com",
-    projectId: "paris-bistro-6b97e",
-    storageBucket: "paris-bistro-6b97e.appspot.com",
-    messagingSenderId: "969052337299",
-    appId: "1:969052337299:web:1a3a70d51d11f4f64fc966",
-    measurementId: "G-HDRM88PYEG"
-};
-
-firebase.initializeApp(firebaseConfig)
-
 
 let imagemSelecionada;
-let categoriaSelecionadaAlterar;
-let categoriaSelecionadaRemover;
+let produtoSelecionadaAlterar;
+let produtoSelecionadaRemover;
 
-let tabela = document.getElementById("tabelaCategoria").getElementsByTagName("tbody")[0]
+let tabela = document.getElementById("tabelaProduto").getElementsByTagName("tbody")[0]
 
-let bd = firebase.firestore().collection("categorias");
-let storage = firebase.storage().ref().child("categorias");
+let bd = firebase.firestore().collection("produtos");
+let storage = firebase.storage().ref().child("produtos");
+
+let bdCategoria = firebase.firestore().collection("categorias");
+let categoriasIds = new Map()
+let categoriasNomes = new Map()
 
 let keyLista = []
 
 
-//==================================================== OUVINTE ====================================================
+//==================================================== OUVINTE CATEGORIA ====================================================
+
+bdCategoria.onSnapshot(function (documentos) { 
+
+	documentos.docChanges().forEach(function (changes) {
+
+		if (changes.type === "added") {
+			const doc = changes.doc
+			const dados = doc.data()
+			criarItensDropdown(dados)
+		}
+	})
+})
+
+//-------- exebi categorias na modal de adicionar e de alterar 
+function criarItensDropdown(dados){
+
+	categoriasIds.set(dados.nome,dados.id)
+	categoriasNomes.set(dados.id,dados.nome)
+
+	const dropDownAdicionar = document.getElementById("adicionarDropdown")
+	const dropDownAlterar = document.getElementById("alterarDropdown")
+
+	const optionAdicionar = document.createElement("OPTION")
+	optionAdicionar.innerHTML = dados.nome
+	const optionAlterar = document.createElement("OPTION")
+	optionAlterar.innerHTML = dados.nome
+
+	dropDownAdicionar.options.add(optionAdicionar)
+	dropDownAlterar.options.add(optionAlterar)
+}
+
+
+//==================================================== OUVINTE PRODUTOS ====================================================
 
 bd.onSnapshot(function (documentos) { 
+
 	documentos.docChanges().forEach(function (changes) {
 
 		if (changes.type === "added") {
@@ -45,13 +70,11 @@ bd.onSnapshot(function (documentos) {
 			const dados = doc.data()
 			removerItensTabela(dados)
 		}
-
 	})
 })
 
 
-//==================================================== TABELA ==================================================== 
-
+//==================================================== TABELA ====================================================
 //---- adicionando itens tabela
 function criarItensTabela(dados) {
 
@@ -59,48 +82,48 @@ function criarItensTabela(dados) {
 
 	const colunaId = linha.insertCell(0)
 	const colunaNome = linha.insertCell(1)
-	const colunaAcoes = linha.insertCell(2)
+	const colunaValor = linha.insertCell(2)
+	const colunaAcoes = linha.insertCell(3)
 
 	const itemId = document.createTextNode(dados.id)
 	const itemNome = document.createTextNode(dados.nome) 
+	const itemValor = document.createTextNode(dados.valor) 
 
 	colunaId.appendChild(itemId)
 	colunaNome.appendChild(itemNome)
+	colunaValor.appendChild(itemValor)
 	
 	criarBotoesTabela(colunaAcoes,dados)
-
 	ordemCrescente()
 }
 
 //---- alterando itens tabela
 function alterarItensTabela(dados) {
-
 	const index = keyLista.indexOf(dados.id)
+
 	const row = tabela.rows[index]
 	const cellId = row.cells[0]
 	const cellNome = row.cells[1]
-	const acoes = row.cells[2]
+	const cellValor = row.cells[2]
+
+	const acoes = row.cells[3]
 
 	acoes.remove()
 
-	const colunaAcoes = row.insertCell(2)
+	const colunaAcoes = row.insertCell(3)
 
 	cellId.innerText = dados.id
 	cellNome.innerText = dados.nome
+	cellValor.innerText = dados.valor
 
 	criarBotoesTabela(colunaAcoes,dados)
-
 }
-
 
 //---- removendo itens tabela
 function removerItensTabela(dados) {
-
 	const index = keyLista.indexOf(dados.id)
-
 	tabela.rows[index].remove()
 	keyLista.splice(index,1)
-
 }
 
 //---- criar botoes tabela
@@ -119,22 +142,18 @@ function criarBotoesTabela(colunaAcoes,dados){
  		return false
 	}
 
-
 	buttonRemover.onclick = function () {
 		abrirModalRemover(dados)
 		return false
 	}
 
-
 	colunaAcoes.appendChild(buttonAlterar)
 	colunaAcoes.appendChild(document.createTextNode(" "))
 	colunaAcoes.appendChild(buttonRemover)
-
 }
 
 
 //==================================================== TRATAMENTO COM IMAGENS ====================================================
-
 //------------------modal adicionar - click em imagem
 function clickAdicionarImagem() {
 	$("#imagemUploadAdicionar").click()
@@ -145,7 +164,6 @@ $("#imagemUploadAdicionar").on("change", function (event) {
 	compactarImagem(event,imagem)
 })
 
-
 //------------------modal alterar - click em imagem
 function clickAlterarImagem() {
 	$("#imagemUploadAlterar").click()
@@ -154,10 +172,10 @@ function clickAlterarImagem() {
 $("#imagemUploadAlterar").on("change", function (event) {
 	const imagem = document.getElementById("imagemAlterar")
 	compactarImagem(event,imagem)
+
 })
 
-
-//------------------funcoes para tratar imagem 
+//-----------------funcoes para tratar imagem 
 function compactarImagem(event, imagem){
 
 	const compress = new Compress()
@@ -172,7 +190,6 @@ function compactarImagem(event, imagem){
 	}).then((data) => {
 
 		if (data[0] != null) {
-
 			const image = data[0]
 			const file = Compress.convertBase64ToFile(image.data, image.ext)
 			imagemSelecionada = file
@@ -181,28 +198,25 @@ function compactarImagem(event, imagem){
 	})
 }
 
-
 function inserirImagem(imagem, file) {
-
 	imagem.file = file
 
 	if (imagemSelecionada != null) {
 
 		const reader = new FileReader()
 		reader.onload = (function (img) {
+
 			return function (e) {
 				img.src = e.target.result
 			}
 		})(imagem)
-
 		reader.readAsDataURL(file)
 	}
 }
 
 
 //==================================================== MODAL ADICIONAR ====================================================
-
-//------------abrir modal
+//------------abri modal
 function abrirModalAdicionar() {
 	$("#modalAdicionar").modal()
 }
@@ -211,23 +225,31 @@ function abrirModalAdicionar() {
 function limparCamposAdicionar() {
 	document.getElementById("adicionarID").value = ""
 	document.getElementById("adicionarNome").value = ""
-	document.getElementById("imagemAdicionar").src = "#"
-	
+	document.getElementById("adicionarValor").value = ""
+	document.getElementById("adicionarDescricao").value = ""
+    
+    document.getElementById("imagemAdicionar").src = "#"
 	$("#imagemUploadAdicionar").val("")
 	imagemSelecionada = null
 }
 
-
 //------------ botao de salvar da modal
 function buttonAdicionarValidarCampos() {
+
 	const id = document.getElementById("adicionarID").value
 	const nome = document.getElementById("adicionarNome").value
+	const valor = document.getElementById("adicionarValor").value
 
+	const categoria = document.getElementById("adicionarDropdown").value
+	const categoria_id = categoriasIds.get(categoria)
+
+	const descricao = document.getElementById("adicionarDescricao").value
+	const possui_adicional = document.getElementById("adicionarRadioSim").checked
+	
 	if (keyLista.indexOf(id) > -1) {
 		abrirModalAlerta("ID já está Cadastrado no Sistema")
 	}
-
-	else if (nome.trim() == "" || id.trim() == "") {
+	else if (nome.trim() == "" || id.trim() == "" || valor.trim() == "" || descricao.trim() == "" ) {
 		abrirModalAlerta("Preencha todos os Campos")
 	}
 	else if (imagemSelecionada == null) {
@@ -235,40 +257,37 @@ function buttonAdicionarValidarCampos() {
 	}
 	else {
 		abrirModalProgress()
-		salvarImagemFirebase(id, nome)
+		salvarImagemFirebase(id, nome,valor, categoria_id,descricao,possui_adicional)
 	}
 }
 
-
 //------------ salvar imagem Firebase
-function salvarImagemFirebase(id, nome) {
+function salvarImagemFirebase(id, nome,valor, categoria_id,descricao,possui_adicional) {
+
 	const nomeImagem = id
 	const upload = storage.child(nomeImagem).put(imagemSelecionada)
 
 	upload.on("state_changed", function (snapshot) {
-
 	}, function (error) {
-
 		abrirModalAlerta("Erro ao Salvar Imagem")
 		removerModalProgress()
-
 	}, function () {
-
 		upload.snapshot.ref.getDownloadURL().then(function (url_imagem) {
-
-			salvarDadosFirebase(id, nome, url_imagem)
-
+			salvarDadosFirebase(id, nome,valor, categoria_id,descricao,possui_adicional, url_imagem)
 		})
 	})
 }
 
-
 //------------ salvar dados Firebase
-function salvarDadosFirebase(id, nome, url_imagem) {
+function salvarDadosFirebase(id, nome,valor, categoria_id,descricao,possui_adicional, url_imagem) {
 
 	const dados = {
 		id: id,
 		nome: nome,
+		valor: valor,
+		categoria_id: categoria_id,
+		descricao: descricao,
+		possui_adicional: possui_adicional,
 		url_imagem: url_imagem
 	}
 
@@ -281,7 +300,6 @@ function salvarDadosFirebase(id, nome, url_imagem) {
 		removerModalProgress()
 		abrirModalAlerta("Erro ao Salvar Dados: " + error)
 	})
-
 }
 
 
@@ -292,78 +310,96 @@ function limparCamposAlterar() {
 	imagemSelecionada = null
 }
 
-
-//------------abrir modal
+//------------abri modal
 function abrirModalAlterar(dados) {
 	$("#modalAlterar").modal()
-
 	const id = document.getElementById("alterarID")
 	const nome = document.getElementById("alterarNome")
+	const valor = document.getElementById("alterarValor")
+	const dropDown = document.getElementById("alterarDropdown")
+	const descricao = document.getElementById("alterarDescricao")
+	const radioButtonNao = document.getElementById("alterarRadioNao")
+	const radioButtonSim = document.getElementById("alterarRadioSim")
 	const imagem = document.getElementById("imagemAlterar")
 
 	id.innerText = dados.id
 	nome.value = dados.nome
+	valor.value = dados.valor
+	dropDown.value = categoriasNomes.get(dados.categoria_id)
+	descricao.value = dados.descricao
 	imagem.src = dados.url_imagem
 
-	categoriaSelecionadaAlterar = dados
+	if( dados.possui_adicional){
+		radioButtonSim.checked = true
+	}else{
+		radioButtonNao.checked = true
+	}
+	produtoSelecionadaAlterar = dados
 }
 
-
 function buttonAlterarValidarCampos() {
-
 	const id = document.getElementById("alterarID").innerHTML
 	const nome = document.getElementById("alterarNome").value
+
+	const valor = document.getElementById("alterarValor").value
+
+	const categoria = document.getElementById("alterarDropdown").value
+	const categoria_id = categoriasIds.get(categoria)
+
+	const descricao = document.getElementById("alterarDescricao").value
+	const possui_adicional = document.getElementById("alterarRadioSim").checked
 	
-	if (categoriaSelecionadaAlterar.nome.trim() == nome.trim()  && imagemSelecionada == null ){
+	if (produtoSelecionadaAlterar.nome.trim() == nome.trim() && 
+		produtoSelecionadaAlterar.valor.trim() == valor.trim()  &&  
+		produtoSelecionadaAlterar.categoria_id.trim() == categoria_id.trim() &&
+		produtoSelecionadaAlterar.descricao.trim() == descricao.trim() &&
+		produtoSelecionadaAlterar.possui_adicional == possui_adicional &&  imagemSelecionada == null ){
+
 		abrirModalAlerta("Nenhuma informação foi alterada")
 	}
-
-	else if (nome.trim() == ""){
+	else if (nome.trim() == "" || valor.trim() == "" || descricao.trim() == "" ){
 		abrirModalAlerta("Preencha os campos obrigatórios")
 	}
-
 	else if (imagemSelecionada != null){ // vamos executar se o usuario alterar a imagem (nome)
 		abrirModalProgress()
-		alterarImagemFirebase(id,nome)
+		alterarImagemFirebase(id, nome,valor, categoria_id,descricao,possui_adicional)
 	}
 	else{ // vamos executar esse else somente se o usuario alterar somente o nome
 		abrirModalProgress()
-		alterarDadosFirebase(id,nome,categoriaSelecionadaAlterar.url_imagem)
+		alterarDadosFirebase(id, nome,valor, categoria_id,descricao,possui_adicional,produtoSelecionadaAlterar.url_imagem)
 	}
 }
 
 //------------ alterar imagem Firebase
-function alterarImagemFirebase(id, nome) {
+function alterarImagemFirebase(id, nome,valor, categoria_id,descricao,possui_adicional) {
+
 	const nomeImagem = id
 	const upload = storage.child(nomeImagem).put(imagemSelecionada)
-
 	upload.on("state_changed", function (snapshot) {
-
 	}, function (error) {
 		abrirModalAlerta("Erro ao Alterar Imagem")
 		removerModalProgress()
-
 	}, function () {
-
 		upload.snapshot.ref.getDownloadURL().then(function (url_imagem) {
-			alterarDadosFirebase(id, nome, url_imagem)
+			alterarDadosFirebase(id, nome,valor, categoria_id,descricao,possui_adicional, url_imagem)
 		})
 	})
 }
 
-
 //------------ alterar dados Firebase
-function alterarDadosFirebase(id, nome, url_imagem) {
+function alterarDadosFirebase(id, nome,valor, categoria_id,descricao,possui_adicional, url_imagem) {
 
 	const dados = {
 		id: id,
 		nome: nome,
+		valor: valor,
+		categoria_id: categoria_id,
+		descricao: descricao,
+		possui_adicional: possui_adicional,
 		url_imagem: url_imagem
 	}
 
-
 	bd.doc(id).update(dados).then(function () {
-
 		$("#modalAlterar").modal("hide")
 		removerModalProgress()
 		limparCamposAlterar()
@@ -373,49 +409,25 @@ function alterarDadosFirebase(id, nome, url_imagem) {
 		removerModalProgress()
 		abrirModalAlerta("Erro ao Alterar Dados: " + error)
 	})
-
 }
 
-
 //==================================================== MODAL REMOVER ====================================================
-
 //------------abri modal
 function abrirModalRemover(dados) {
 	$("#modalRemover").modal()
-	categoriaSelecionadaRemover = dados
+	produtoSelecionadaRemover = dados
 }
 
 
 //------------ click em botao de SIM na modal de remover
-function removerCategoria() {
+function removerProduto() {
 	abrirModalProgress()
-	//removerImagemFirebase()
-	consultarProdutos()
+	removerImagemFirebase()
 }
-
-function consultarProdutos(){
-	const id = categoriaSelecionadaRemover.id
-	const bdProdutos = firebase.firestore().collection("produtos");
-
-	bdProdutos.where("categoria_id","==",id).get().then(function(query){
-		
-		const resultado = query.docs.length
-
-		if(resultado == 0){
-			abrirModalProgress()
-			removerImagemFirebase()
-		}
-		else{
-			abrirModalAlerta("Existem produtos associados a essa categoria - impossivel de remover enquanto estiverem associados")
-		}
-	})
-}
-
 
 //------------ remover imagem Firebase
 function removerImagemFirebase(){
-
-	const nomeImagem = categoriaSelecionadaRemover.id
+	const nomeImagem = produtoSelecionadaRemover.id
 	const imagem = storage.child(nomeImagem)
 
 	imagem.delete().then(function(){
@@ -425,29 +437,24 @@ function removerImagemFirebase(){
 		removerModalProgress()
 		abrirModalAlerta("Erro ao Remover Imagem: " + error)
 	})
-	
 }
-
 
 //------------ remover dados Firebase
 function removerDadosFirebase(){
-	const id = categoriaSelecionadaRemover.id
+	const id = produtoSelecionadaRemover.id
 
 	bd.doc(id).delete().then(function () {
 		$("#modalRemover").modal("hide")
 		removerModalProgress()
 		abrirModalAlerta("Sucesso ao Remover Dados")
 
-	}).catch(function (error) {
+    }).catch(function (error) {
 		removerModalProgress()
 		abrirModalAlerta("Erro ao Remover Dados: " + error)
-
 	})
 }
 
-
-//==================================================== MODAL PROGRESSBAR ====================================================
-
+//==================================================== MODAL PROGRESS ====================================================
 function abrirModalProgress() {
 	$("#modalProgress").modal()
 }
@@ -461,13 +468,14 @@ function removerModalProgress() {
 
 
 //==================================================== MODAL ALERTA ====================================================
+
 function abrirModalAlerta(mensagem) {
 	$("#modalAlerta").modal()
 	document.getElementById("alertaMenssagem").innerText = mensagem
 }
 
 
-//==================================================== FUNÇOES TABELA ====================================================
+//==================================================== FUNÇOES DA TABELA ====================================================
 //-----------------------------pesquisa por id e nome
 function pesquisar(opcao) {
 
@@ -478,13 +486,13 @@ function pesquisar(opcao) {
 
 	for (i = 0; i < tr.length; i++) {
 		td = tr[i].getElementsByTagName("td")[opcao]
-		
+
 		if (td) {
 			valorItemTabela = td.textContent.toUpperCase()
-			
 			if (valorItemTabela.indexOf(filtro) == -1) {
 				tr[i].style.display = "none"
-			} else {
+            } 
+            else {
 				tr[i].style.display = ""
 			}
 		}
@@ -492,21 +500,21 @@ function pesquisar(opcao) {
 }
 
 //==================================================== PAGINAÇÃO ====================================================
+
 $("#maxRows").on("change", function () {
 
 	let maxRows, tr, i;
-
 	maxRows = parseInt($("#maxRows").val()) - 1
 	tr = tabela.getElementsByTagName("tr")
 
 	for (i = 0; i < tr.length; i++) {
 		if (i > maxRows) {
 			tr[i].style.display = "none"
-		} else {
+        } 
+        else {
 			tr[i].style.display = ""
 		}
 	}
-
 
 	//----------paginação inserindo botoes
 	$("#pagination").html("")
@@ -516,11 +524,11 @@ $("#maxRows").on("change", function () {
 
 	if (totalRows > rows) {
 		let numpage = Math.ceil(totalRows / rows)
+
 		for (let i = 1; i <= numpage; i++) {
 			$("#pagination").append(' <li class="page-item">   <a class="page-link" href="#" >' + i + '</a></li> ').show()
 		}
 	}
-
 
 	//----------paginação  click
 	$("#pagination").on("click", function (e) {
@@ -528,18 +536,18 @@ $("#maxRows").on("change", function () {
 		let numpage = parseInt(e.target.innerText)
 
 		i = 1
-		$("#tabelaCategoria tr:gt(0)").each(function () {
+		$("#tabelaProduto tr:gt(0)").each(function () {
 
 			if (i > (rows * numpage) || i <= ((rows * numpage) - rows)) {
 				$(this).hide()
-			} else {
+            } 
+            else {
 				$(this).show()
 			}
 			i++;
 		})
 	})
 })
-
 
 //==================================================== ORDENAÇÃO ====================================================
 
@@ -550,11 +558,13 @@ function ordenarId() {
 	if (ordem) {
 		ordemDecrescente()
 		ordem = false
-	} else {
+    } 
+    else {
 		ordemCrescente()
 		ordem = true
 	}
 }
+
 
 //---------------------ordem Decrescente
 function ordemDecrescente() {
@@ -574,13 +584,10 @@ function ordemDecrescente() {
 				let valor = keyLista[j+1]
 				keyLista[j + 1] = keyLista[j]
 				keyLista[j] = valor
-
 			}
 		}
 	}
 }
-
-
 
 //---------------------ordem Crescente
 function ordemCrescente() {
@@ -594,7 +601,71 @@ function ordemCrescente() {
 			let informacao2 = tr[j + 1].getElementsByTagName("td")[0].textContent // 152
 
 			if (Number(informacao1) > Number(informacao2)) {
-				//	if (informacao1) < informacao2 ) {
+			//	if (informacao1) < informacao2 ) {
+				tabela.insertBefore(tr.item(j + 1), tr.item(j))
+
+				let valor = keyLista[j+1]
+				keyLista[j + 1] = keyLista[j]
+				keyLista[j] = valor
+			}
+		}
+	}
+}
+
+//-----------------------------criar ordenação nome
+
+let ordemNome = false;
+
+function ordenarNome() {
+	if (ordemNome) {
+		ordemDecrescenteNome()
+		ordemNome = false
+    } 
+    else {
+		ordemCrescenteNome()
+		ordemNome = true
+	}
+}
+
+
+//---------------------ordem Decrescente
+function ordemDecrescenteNome() {
+
+	let tr = tabela.getElementsByTagName('tr')
+
+	for (let i = 0; i < tr.length - 1; i++) {
+		for (let j = 0; j < tr.length - (i + 1); j++) {
+
+			let informacao1 = tr[j].getElementsByTagName("td")[1].textContent // 200
+			let informacao2 = tr[j + 1].getElementsByTagName("td")[1].textContent // 152
+
+				if (informacao1 < informacao2 ) {
+
+				tabela.insertBefore(tr.item(j + 1), tr.item(j))
+
+				let valor = keyLista[j+1]
+				keyLista[j + 1] = keyLista[j]
+				keyLista[j] = valor
+			}
+		}
+	}
+}
+
+
+//---------------------ordem Crescente
+
+function ordemCrescenteNome() {
+
+	let tr = tabela.getElementsByTagName('tr')
+
+	for (let i = 0; i < tr.length - 1; i++) {
+		for (let j = 0; j < tr.length - (i + 1); j++) {
+
+			let informacao1 = tr[j].getElementsByTagName("td")[1].textContent // 200
+			let informacao2 = tr[j + 1].getElementsByTagName("td")[1].textContent // 152
+				
+				if (informacao1 >informacao2 ) {
+
 				tabela.insertBefore(tr.item(j + 1), tr.item(j))
 
 				let valor = keyLista[j+1]

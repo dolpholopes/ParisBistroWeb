@@ -1,16 +1,3 @@
-const firebaseConfig = {
-    apiKey: "AIzaSyDRIp4lGgH_chsQK0f064-yh19AuBeRgQo",
-    authDomain: "paris-bistro-6b97e.firebaseapp.com",
-    databaseURL: "https://paris-bistro-6b97e.firebaseio.com",
-    projectId: "paris-bistro-6b97e",
-    storageBucket: "paris-bistro-6b97e.appspot.com",
-    messagingSenderId: "969052337299",
-    appId: "1:969052337299:web:1a3a70d51d11f4f64fc966",
-    measurementId: "G-HDRM88PYEG"
-};
-
-firebase.initializeApp(firebaseConfig)
-
 
 
 let informativoRecuperadoBD;
