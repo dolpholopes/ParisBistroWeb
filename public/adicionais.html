@@ -1,49 +1,49 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
-        <title>Paris Bistro - Adicionais</title>
-    
-        <!-- Bootstrap CSS CDN -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
-            integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-        <!-- Our Custom CSS -->
-        <link rel="stylesheet" href="css/style.css">
-    
-        <!-- Font Awesome JS -->
-        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
-            integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
-            crossorigin="anonymous"></script>
-        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
-            integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
-            crossorigin="anonymous"></script>
-        <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-add-css="false"></script>
-        <link href="https://use.fontawesome.com/releases/v5.15.1/css/svg-with-js.css" rel="stylesheet" />
-    
-    
-        <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-    
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <script src="/__/firebase/7.6.1/firebase-app.js"></script>
-        <script src="/__/firebase/7.6.1/firebase-storage.js"></script>
-        <script src="/__/firebase/7.6.1/firebase-firestore.js"></script>
-        <script src="/__/firebase/7.6.1/firebase-auth.js"></script>
-        <script src="/__/firebase/init.js"></script>
+    <title>Paris Bistro - Adicionais</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+        integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+        integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+        integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+        crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-add-css="false"></script>
+    <link href="https://use.fontawesome.com/releases/v5.15.1/css/svg-with-js.css" rel="stylesheet" />
 
 
-        <script src="js/logado.js"></script>
-    
-        <script src="https://compressjs.herokuapp.com/compress.js"></script>
-    </head>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+
+    <script src="/__/firebase/7.6.1/firebase-app.js"></script>
+    <script src="/__/firebase/7.6.1/firebase-storage.js"></script>
+    <script src="/__/firebase/7.6.1/firebase-firestore.js"></script>
+    <script src="/__/firebase/7.6.1/firebase-auth.js"></script>
+    <script src="/__/firebase/init.js"></script>
+
+
+    <script src="js/logado.js"></script>
+
+    <script src="https://compressjs.herokuapp.com/compress.js"></script>
+</head>
 
 <body>
 
 
-    
+
     <div class="wrapper">
         <!--MENU LATERAL ESQUERDO-->
         <nav id="sidebar">
@@ -140,19 +140,20 @@
         <div id="content">
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<div class="container-fluid">
-					<button type="button" id="sidebarCollapse" class="btn btn-dark" style="background-color: #000000;">
-						<i class="fas fa-align-left"></i>
-					</button>
-					<div class="form-group">
-						<p style="font-family: 'Lobster'; font-size: 35px; color: #000000 "> Adicionais</p>
-					</div>
-					<br>
-				</div>
-			</nav>
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-dark" style="background-color: #000000;">
+                        <i class="fas fa-align-left"></i>
+                    </button>
+                    <div class="form-group">
+                        <p style="font-family: 'Lobster'; font-size: 35px; color: #000000 "> Adicionais</p>
+                    </div>
+                    <br>
+                </div>
+            </nav>
 
             <div class="card-body">
-                <button type="button" id="addAdicional" style="background-color: #000000;" class="btn btn-dark" onclick="abrirModalAdicionar()">
+                <button type="button" id="addAdicional" style="background-color: #000000;" class="btn btn-dark"
+                    onclick="abrirModalAdicionar()">
                     <i class="fas fa-plus"></i>
                     Novo Adicional
                 </button>
@@ -203,7 +204,7 @@
     </div>
 
 
-    
+
     <div>
         <!-- MODAL ADICIONAR -->
         <div class="modal fade" id="modalAdicionar" style="overflow-y: scroll ;" data-backdrop="static" tabindex="-1"
@@ -273,7 +274,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" >Cancelar</button> &nbsp
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button> &nbsp
                     </div>
                 </div>
             </div>
@@ -291,7 +292,8 @@
                         Deseja realmente remover esta adicional?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" style="background-color: black;" class="btn btn-dark" onclick="removerAdicional()">Sim</button> &nbsp
+                        <button type="button" style="background-color: black;" class="btn btn-dark"
+                            onclick="removerAdicional()">Sim</button> &nbsp
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
@@ -310,7 +312,8 @@
                         <label id="alertaMenssagem"></label>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" style="background-color: black;" class="btn btn-dark" data-dismiss="modal">OK</button>
+                        <button type="button" style="background-color: black;" class="btn btn-dark"
+                            data-dismiss="modal">OK</button>
                     </div>
                 </div>
             </div>
@@ -343,6 +346,7 @@
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
 
+    <script src="js/persistencia.js"></script>
     <script src="js/adicional.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {

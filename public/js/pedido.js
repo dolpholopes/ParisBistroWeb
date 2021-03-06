@@ -52,6 +52,10 @@ function criarItensTabela(dados) {
 	colunaPedidoDados.appendChild(document.createTextNode(dados_pedido.replace(/<br>/g, "")))
 	colunaPedidoHora.appendChild(document.createTextNode(dados.pedido_data))
 
+	colunaClienteNome.style = "text-align: center"
+	colunaPedidoDados.style = "text-align: center"
+	colunaPedidoHora.style = "text-align: center"
+
 	criarBotoesTabela(linha, dados)
 
 	//ordemCrescente()
@@ -79,18 +83,22 @@ function criarBotoesTabela(linha, dados) {
 	const buttonDetalhesPedido = document.createElement("button")
 	buttonDetalhesPedido.innerHTML = ` <i class="fas fa-info"></i> `
 	buttonDetalhesPedido.className = "btn btn-success btn-xs"
+	buttonDetalhesPedido.style = "margin: auto; display: block;"
 
 	const buttonDetalhesClientes = document.createElement("button")
 	buttonDetalhesClientes.innerHTML = `<i class="fas fa-info"></i> `
 	buttonDetalhesClientes.className = "btn btn-success btn-xs"
+	buttonDetalhesClientes.style = "margin: auto; display: block;"
 
 	const buttonImprimir = document.createElement("button")
 	buttonImprimir.innerHTML = `<i class="fas fa-print"></i> `
 	buttonImprimir.className = "btn btn-success btn-xs"
+	buttonImprimir.style = "margin: auto; display: block;"
 
 	const buttonFinalizar = document.createElement("button")
 	buttonFinalizar.innerHTML = `<center><i class="fas fa-check"></i></center> `
 	buttonFinalizar.className = "btn btn-success btn-xs"
+	buttonFinalizar.style = "margin: auto; display: block;"
 
 	buttonDetalhesPedido.onclick = function () {
 		clickDetalhePedido(dados)

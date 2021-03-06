@@ -1,45 +1,45 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
-        <title>Paris Bistro - Produtos</title>
-    
-        <!-- Bootstrap CSS CDN -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
-            integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-        <!-- Our Custom CSS -->
-        <link rel="stylesheet" href="css/style.css">
-    
-        <!-- Font Awesome JS -->
-        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
-            integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
-            crossorigin="anonymous"></script>
-        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
-            integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
-            crossorigin="anonymous"></script>
-        <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-add-css="false"></script>
-        <link href="https://use.fontawesome.com/releases/v5.15.1/css/svg-with-js.css" rel="stylesheet" />
-    
-    
-        <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-    
-    
-        <script src="/__/firebase/7.6.1/firebase-app.js"></script>
-        <script src="/__/firebase/7.6.1/firebase-storage.js"></script>
-        <script src="/__/firebase/7.6.1/firebase-firestore.js"></script>
-        <script src="/__/firebase/7.6.1/firebase-auth.js"></script>
-        <script src="/__/firebase/init.js"></script>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <script src="js/logado.js"></script>
-    
-        <script src="https://compressjs.herokuapp.com/compress.js"></script>
+    <title>Paris Bistro - Produtos</title>
 
-        
-    </head>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+        integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+        integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+        integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+        crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-add-css="false"></script>
+    <link href="https://use.fontawesome.com/releases/v5.15.1/css/svg-with-js.css" rel="stylesheet" />
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+
+    <script src="/__/firebase/7.6.1/firebase-app.js"></script>
+    <script src="/__/firebase/7.6.1/firebase-storage.js"></script>
+    <script src="/__/firebase/7.6.1/firebase-firestore.js"></script>
+    <script src="/__/firebase/7.6.1/firebase-auth.js"></script>
+    <script src="/__/firebase/init.js"></script>
+
+    <script src="js/logado.js"></script>
+
+    <script src="https://compressjs.herokuapp.com/compress.js"></script>
+
+
+</head>
 
 <body>
 
@@ -52,13 +52,13 @@
             </div>
 
             <ul class="list-unstyled components">
-                
+
                 <li class="treeview">
                     <a href="pedidos.html" aria-expanded="false" class="dropdown-toggle">
                         <i class="fas fa-home"></i>
                         pedidos
                     </a>
-                    
+
                 </li>
                 <li class="treeview">
                     <a href="#categoriaSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -131,26 +131,27 @@
                     </ul>
                 </li>
             </ul>
-            
+
         </nav>
 
         <!-- Conteudo da pagina  -->
         <div id="content">
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<div class="container-fluid">
-					<button type="button" id="sidebarCollapse" style="background-color: black;" class="btn btn-dark">
-						<i class="fas fa-align-left"></i>
-					</button>
-					<div class="form-group">
-						<p style="font-family: 'Lobster'; font-size: 35px; color: #000000 "> Produtos</p>
-					</div>
-					<br>
-				</div>
-			</nav>
-           
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" style="background-color: black;" class="btn btn-dark">
+                        <i class="fas fa-align-left"></i>
+                    </button>
+                    <div class="form-group">
+                        <p style="font-family: 'Lobster'; font-size: 35px; color: #000000 "> Produtos</p>
+                    </div>
+                    <br>
+                </div>
+            </nav>
+
             <div class="card-body">
-                <button type="button" id="addProduto" style="background-color: black;" class="btn btn-dark" onclick="abrirModalAdicionar()">
+                <button type="button" id="addProduto" style="background-color: black;" class="btn btn-dark"
+                    onclick="abrirModalAdicionar()">
                     <i class="fas fa-plus"></i>
                     Novo Produto
                 </button>
@@ -245,12 +246,14 @@
                             </label>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="nameAdicionarRadio" id="adicionarRadioNao"  checked>
+                                <input class="form-check-input" type="radio" name="nameAdicionarRadio"
+                                    id="adicionarRadioNao" checked>
                                 <label class="form-check-label"> Não possui adicional</label>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="nameAdicionarRadio" id="adicionarRadioSim">
+                                <input class="form-check-input" type="radio" name="nameAdicionarRadio"
+                                    id="adicionarRadioSim">
                                 <label class="form-check-label"> Sim possui adicional</label>
                             </div>
 
@@ -319,12 +322,14 @@
                             </label>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="nameAdicionarRadio" id="alterarRadioNao"  checked>
+                                <input class="form-check-input" type="radio" name="nameAdicionarRadio"
+                                    id="alterarRadioNao" checked>
                                 <label class="form-check-label"> Não possui adicional</label>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="nameAdicionarRadio" id="alterarRadioSim">
+                                <input class="form-check-input" type="radio" name="nameAdicionarRadio"
+                                    id="alterarRadioSim">
                                 <label class="form-check-label"> Sim possui adicional</label>
                             </div>
 
@@ -362,7 +367,8 @@
                         Deseja realmente remover este produto?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" style="background-color: black;" class="btn btn-dark" onclick="removerProduto()">Sim</button> &nbsp
+                        <button type="button" style="background-color: black;" class="btn btn-dark"
+                            onclick="removerProduto()">Sim</button> &nbsp
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
@@ -381,7 +387,8 @@
                         <label id="alertaMenssagem"></label>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" style="background-color: black;" class="btn btn-dark" data-dismiss="modal">OK</button>
+                        <button type="button" style="background-color: black;" class="btn btn-dark"
+                            data-dismiss="modal">OK</button>
                     </div>
                 </div>
             </div>
@@ -414,6 +421,7 @@
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
 
+    <script src="js/persistencia.js"></script>
     <script src="js/produto.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
