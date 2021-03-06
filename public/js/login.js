@@ -69,7 +69,27 @@ function confirmarAdmin(){
     })
 }
 
+//==================================================== MOSTRAR SENHA ====================================================
+function revelarSenha(){
+    const senha = document.getElementById("senha")
+    const imagemRevelarSenha = document.getElementById("imagemRevelarSenha")
 
+    if(senha.type == "password"){
+        senha.type =  "text"
+        imagemRevelarSenha.setAttribute("class","fas fa-eye-slash")
+    }
+    else{
+        senha.type = "password"
+        imagemRevelarSenha.setAttribute("class","fas fa-eye")
+    }
+}
+
+//============================== PULAR INPUT COM ENTER ==================================
+function proximoInput(id, evento){
+    if(evento.keyCode == 13){
+        document.getElementById(id).focus()
+    }
+}
 //==================================================== MODAL PROGRESSBAR ====================================================
 function abrirModalProgress() {
 	$("#modalProgress").modal()

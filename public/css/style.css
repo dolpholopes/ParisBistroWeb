@@ -82,9 +82,14 @@ span {
 }
 
 #sidebar.active {
-    min-width: 80px;
-    max-width: 80px;
+    min-width: 100px;
+    max-width: 100px;
     text-align: center;
+}
+
+#sidebar.active.components span{
+    display: block;
+    display: none;
 }
 
 #sidebar.active .sidebar-header h3,
@@ -149,7 +154,7 @@ span {
 
 #sidebar ul li a:hover {
     color: #000000;
-    background: #fff;
+    background: rgb(163, 160, 160);
 }
 
 #sidebar ul li a i {

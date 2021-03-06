@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
     <meta charset="utf-8">
@@ -54,18 +55,21 @@
         <br><br>
         <img src="images/parisbistro2.png" style="max-width: 100%;" />
         <div>
-            <input style="font-family: 'Lato'; " type="email" placeholder="E-mail" id="email" />
+            <input style="font-family: 'Lato'; " type="email" placeholder="E-mail" id="email" onkeydown="proximoInput('senha', event)" />
             <div class="bar">
                 <i></i>
             </div>
 
-            <input style="font-family: 'Lato'; " type="password" placeholder="Senha" id="senha" />
-            <div class="bar">
-                <i></i>
+            <div class="row" style="width: 230px; margin-left: 7px;">
+                <input style="font-family: 'Lato'; " type="password" placeholder="Senha" id="senha"  onkeydown="proximoInput('buttonLogin', event)"  />
+                <i class="fas fa-eye" style="align-self: center;" onclick="revelarSenha()" id="imagemRevelarSenha"></i>
+                <div class="bar">
+                    <i></i>
+                </div>
             </div>
             <br>
 
-            <button style="background:  rgb(0,0,0); color: #fff;" onclick="login()">Entrar</button>
+            <button style="background:  rgb(0,0,0); color: #fff;" id="buttonLogin" onclick="login()">Entrar</button>
         </div>
     </div>
 
@@ -84,7 +88,8 @@
                         <label id="alertaMenssagem"> Erro ao Tentar abrir </label>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" style="background-color: black;" class="btn btn-dark" data-dismiss="modal">
+                        <button type="button" style="background-color: black;" class="btn btn-dark"
+                            data-dismiss="modal">
                             Ok
                         </button>
                     </div>
