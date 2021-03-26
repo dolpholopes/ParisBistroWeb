@@ -49,8 +49,11 @@ function criarItensTabela(dados) {
 	const dados_pedido = dados.pedido_dados.substr(0, 10) + " ..."
 
 	colunaClienteNome.appendChild(document.createTextNode(dados.cliente_nome))
-	colunaPedidoDados.appendChild(document.createTextNode(dados_pedido.replace(/<br>/g, "")))
-	colunaPedidoHora.appendChild(document.createTextNode(dados.pedido_data))
+	colunaPedidoDados.appendChild(document.createTextNode(dados_pedido.replace(/<br>/g, "  ")))
+
+	const data = new Date(Number(dados.pedido_data))
+	const date = moment(data).format('HH:mm:ss')
+	colunaPedidoHora.appendChild(document.createTextNode(date))
 
 	colunaClienteNome.style = "text-align: center"
 	colunaPedidoDados.style = "text-align: center"
@@ -137,10 +140,14 @@ function clickDetalhePedido(dados) {
 	const pedido_pagamento = document.getElementById("pedidoPagamento")
 	const pedido_data = document.getElementById("pedidoData")
 
+	const data = new Date(Number(dados.pedido_data))
+	const date = moment(data).format('HH:mm:ss')
+	
+
 	id.innerHTML = dados.pedido_id
 	pedido_dados.innerHTML = dados.pedido_dados
-	pedido_pagamento.innerHTML = dados.pedido_forma_pagamento
-	pedido_data.innerHTML = dados.pedido_data
+	pedido_pagamento.innerHTML ="Valor do pedido: " + dados.pedido_valor + "<br><br>" +  dados.pedido_forma_pagamento
+	pedido_data.innerHTML = date
 
 }
 
@@ -176,15 +183,19 @@ function validarCamposNotificação() {
 }
 
 function obterDadosNotificacao(titulo, mensagem, token) {
-	firebase.firestore().collection("app").doc("notificacao").get().then(function (documento) {
+	if (token == "Sem token"){
+		abrirModalAlerta("Não foi possivel enviar uma notificação para esse cliente ")
+	}else{
+		firebase.firestore().collection("app").doc("notificacao").get().then(function (documento) {
 
-		const dados = documento.data()
-		const key = dados.key
-
-		postMessage(titulo, mensagem, token, key)
-	}).catch(function (error) {
-		abrirModalAlerta("Erro ao enviar notificação " + error)
-	})
+			const dados = documento.data()
+			const key = dados.key
+	
+			postMessage(titulo, mensagem, token, key)
+		}).catch(function (error) {
+			abrirModalAlerta("Erro ao enviar notificação " + error)
+		})
+	}	
 }
 
 function post(titulo, mensagem, topico, key) {
@@ -224,6 +235,10 @@ function post(titulo, mensagem, topico, key) {
 // ===============================  BOTÃO IMPRIMIR =======================================
 function clickImprimir(dados) {
 
+	const data = new Date(Number(dados.pedido_data))
+	const date = moment(data).format('HH:mm:ss')
+
+
 	const doc = new jsPDF("potrait", "mm", [597, 410])
 
 	doc.setFont("helvetica")
@@ -235,7 +250,7 @@ function clickImprimir(dados) {
 
 	doc.setFont("times")
 	doc.setFontStyle("normal")
-	doc.text("Data e hora do pedido:\n " + dados.pedido_data, 20, 20)
+	doc.text("Data e hora do pedido:\n " + date, 20, 20)
 
 	doc.text("Cliente:\n " + dados.cliente_nome, 20, 40)
 
