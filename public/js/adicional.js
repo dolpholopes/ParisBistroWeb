@@ -92,11 +92,11 @@ function criarBotoesTabela(colunaAcoes,dados){
 
 	const buttonAlterar = document.createElement("button")
 	buttonAlterar.innerHTML = ` <i class="fas fa-edit"></i> `
-	buttonAlterar.className = "btn btn-success btn-xs"
+	buttonAlterar.className = "btn btn-outline-success btn-xs"
 
 	const buttonRemover = document.createElement("button")
 	buttonRemover.innerHTML = `<i class="fas fa-trash-alt"></i> `
-	buttonRemover.className = "btn btn-danger btn-xs"
+	buttonRemover.className = "btn btn-outline-danger btn-xs"
 
 	buttonAlterar.onclick = function () {
 		abrirModalAlterar(dados) 

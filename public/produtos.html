@@ -47,8 +47,7 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Paris Bistrô</h3>
-                <strong><img src="images/logo preta.png" width="75" height="75"></strong>
+                <h3>Painel Administrativo</h3>
             </div>
 
             <ul class="list-unstyled components">
@@ -137,20 +136,20 @@
         <!-- Conteudo da pagina  -->
         <div id="content">
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light" id="imageCardHeader">
                 <div class="container-fluid">
-                    <button type="button" id="sidebarCollapse" style="background-color: black;" class="btn btn-dark">
+                    <button type="button" id="sidebarCollapse" style="background-image: url('images/fundo-madeira.jpg');" class="btn btn-dark">
                         <i class="fas fa-align-left"></i>
                     </button>
                     <div class="form-group">
-                        <p style="font-family: 'Lobster'; font-size: 35px; color: #000000 "> Produtos</p>
+                        <p style="font-family: 'Lobster'; font-size: 35px; color: #fff "> Produtos</p>
                     </div>
                     <br>
                 </div>
             </nav>
 
             <div class="card-body">
-                <button type="button" id="addProduto" style="background-color: black;" class="btn btn-dark"
+                <button type="button" id="addProduto" style="background-image: url('images/fundo-madeira.jpg');" class="btn btn-dark"
                     onclick="abrirModalAdicionar()">
                     <i class="fas fa-plus"></i>
                     Novo Produto
@@ -158,10 +157,10 @@
             </div>
 
             <div style="margin: 0 auto; float: right;">
-                <input type="text" id="pesquisar0" onkeyup="pesquisar(0)" placeholder="Pesquisar ID ..."> &nbsp
-                <input type="text" id="pesquisar1" onkeyup="pesquisar(1)" placeholder="Pesquisar Nome ..."> &nbsp
+                <input type="text" class="form-control" id="pesquisar0" onkeyup="pesquisar(0)" placeholder="Pesquisar ID ...">
+                <input type="text" class="form-control" id="pesquisar1" onkeyup="pesquisar(1)" placeholder="Pesquisar Nome ...">
 
-                <select name="state" id="maxRows" style="height: 30; margin-right: 15;">
+                <select name="state" class="form-control" id="maxRows" style="height: 30; margin-right: 15;">
                     <option value="100"> Mostrar Todos</option>
                     <option value="5"> 5</option>
                     <option value="10"> 10</option>
@@ -205,75 +204,98 @@
     <div>
         <div class="modal fade" id="modalAdicionar" style="overflow-y: scroll ;" data-backdrop="static" tabindex="-1"
             role="dialog">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <div class="modal-header" style="padding: 35px 50px;">
-                        <h4 style="color: #000000;"> Adicionar Produto </h4>
+                    <div class="modal-header" style="padding: 35px 50px;" id="imageModalHeader">
+                        <h4 style="color: #fff;"> Adicionar Produto </h4>
                     </div>
                     <div class="modal-body" style="padding: 40px 50px;">
-                        <div class="form-group">
-                            <label for="adicionarID"> ID: </span> </label>
-                            <input type="number" class="form-control" id="adicionarID" />
-                        </div>
 
-                        <div class="form-group">
-                            <label for="adicionarNome"> Nome: </span>
-                            </label>
-                            <input type="text" class="form-control" id="adicionarNome" />
-                        </div>
+                        <form>
+                            <div class="form-row">
 
-                        <div class="form-group">
-                            <label for="adicionarValor"> Valor: </span>
-                            </label>
-                            <input type="number" class="form-control" id="adicionarValor" />
-                        </div>
+                                <div class="form-group col-md-2">
+                                    <label for="adicionarID"> ID: </span> </label>
+                                    <input type="number" class="form-control" id="adicionarID" />
+                                </div>
 
-                        <div class="form-group">
-                            <label for="adicionarDropdown"> Categoria: </span>
-                            </label>
-                            <br>
-                            <select style="width: 300px;" id="adicionarDropdown"></select>
-                        </div>
+                                <div class="form-group col-md-7">
+                                    <label for="adicionarNome"> Nome: </span>
+                                    </label>
+                                    <input type="text" class="form-control" id="adicionarNome" />
+                                </div>
 
-                        <div class="form-group">
-                            <label for="adicionarDescricao"> Descrição produto: </span>
-                            </label>
-                            <textarea rows="3" cols="40" style="max-width: 100%;" id="adicionarDescricao"></textarea>
-                        </div>
+                                <div class="form-group col-md-3">
+                                    <label for="adicionarValor"> Valor: </span>
+                                    </label>
+                                    <input type="number" class="form-control" id="adicionarValor" />
+                                </div>
 
-                        <div class="form-group">
-                            <label for="adicionarDescricao"> Possui adicional?: </span>
-                            </label>
+                                <div class="form-group col-md-4">
+                                    <label for="adicionarDropdown"> Categoria: </span>
+                                    </label>
+                                    <br>
+                                    <select style="width: 80%" id="adicionarDropdown"></select>
+                                </div>
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="nameAdicionarRadio"
-                                    id="adicionarRadioNao" checked>
-                                <label class="form-check-label"> Não possui adicional</label>
+                                <div class="form-group col-md-4">
+                                    <label for="adicionarDescricao"> Descrição produto: </span>
+                                    </label>
+                                    <textarea rows="3" cols="40" style="max-width: 90%;"
+                                        id="adicionarDescricao"></textarea>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label for="adicionarDescricao"> Possui adicional?: </span>
+                                    </label>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="nameAdicionarRadio"
+                                            id="adicionarRadioNao" checked>
+                                        <label class="form-check-label"> Não possui adicional</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="nameAdicionarRadio"
+                                            id="adicionarRadioSim">
+                                        <label class="form-check-label"> Sim possui adicional</label>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label>
+                                        <span> Imagem: </span>
+                                        <input type="file" class="upload-group" id="imagemUploadAdicionar" />
+                                    </label>
+                                    <br>
+                                    <img class="razer" id="imagemAdicionar" width="80" height="80"
+                                        onclick="clickAdicionarImagem()">
+                                    <br>
+                                </div>
+
                             </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-10">
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="nameAdicionarRadio"
-                                    id="adicionarRadioSim">
-                                <label class="form-check-label"> Sim possui adicional</label>
+                                    <button type="button" style="background-image: url('images/fundo-madeira.jpg');"
+                                        class="btn btn-dark btn-block"
+                                        onclick="buttonAdicionarValidarCampos()">Salvar</button>
+
+                                </div>
+                                <div class="form-group col-md-2">
+
+                                    <button type="button" class="btn btn-light btn-outline-danger" data-dismiss="modal"
+                                        onclick="limparCamposAdicionar()">Cancelar</button> &nbsp
+
+                                </div>
+
                             </div>
-
-                        </div>
-
-                        <label>
-                            <span> Imagem: </span>
-                            <input type="file" class="upload-group" id="imagemUploadAdicionar" />
-                        </label>
-                        <br>
-                        <img class="razer" id="imagemAdicionar" width="80" height="80" onclick="clickAdicionarImagem()">
-                        <br><br>
-
-                        <button type="button" style="background-color: black;" class="btn btn-dark btn-block"
-                            onclick="buttonAdicionarValidarCampos()">Salvar</button>
+                        </form>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"
-                            onclick="limparCamposAdicionar()">Cancelar</button> &nbsp
+
                     </div>
                 </div>
             </div>
@@ -282,128 +304,149 @@
         <!-- MODAL ALTERAR -->
         <div class="modal fade" id="modalAlterar" style="overflow-y: scroll ;" data-backdrop="static" tabindex="-1"
             role="dialog">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <div class="modal-header" style="padding: 35px 50px;">
-                        <h4 style="color: #000000;"> Alterar Produto </h4>
+                    <div class="modal-header" style="padding: 35px 50px;" id="imageModalHeader">
+                        <h4 style="color: #fff;"> Alterar Produto </h4>
                     </div>
                     <div class="modal-body" style="padding: 40px 50px;">
-                        <div class="form-group">
-                            <label> ID: </span> </label>
-                            <label type="text" id="alterarID"></label>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="alterarNome"> Nome: </span> </label>
-                            <input type="text" class="form-control" id="alterarNome" />
-                        </div>
+                        <form>
+                            <div class="form-row">
 
-                        <div class="form-group">
-                            <label for="alterarValor"> Valor: </span>
-                            </label>
-                            <input type="number" class="form-control" id="alterarValor" />
-                        </div>
+                                <div class="form-group col-md-2">
+                                    <label> ID: </span> </label>
+                                    <label type="text" id="alterarID"></label>
+                                </div>
 
-                        <div class="form-group">
-                            <label for="alterarDropdown"> Categoria: </span>
-                            </label>
-                            <br>
-                            <select style="width: 300px;" id="alterarDropdown"></select>
-                        </div>
+                                <div class="form-group col-md-7">
+                                    <label for="alterarNome"> Nome: </span> </label>
+                                    <input type="text" class="form-control" id="alterarNome" />
+                                </div>
 
-                        <div class="form-group">
-                            <label for="alterarDescricao"> Descrição produto: </span>
-                            </label>
-                            <textarea rows="3" cols="40" style="max-width: 100%;" id="alterarDescricao"></textarea>
-                        </div>
+                                <div class="form-group col-md-3">
+                                    <label for="alterarValor"> Valor: </span>
+                                    </label>
+                                    <input type="number" class="form-control" id="alterarValor" />
+                                </div>
 
-                        <div class="form-group">
-                            <label for="alterarDescricao"> Possui adicional?: </span>
-                            </label>
+                                <div class="form-group col-md-4">
+                                    <label for="alterarDropdown"> Categoria: </span>
+                                    </label>
+                                    <br>
+                                    <select style="width: 80%;" id="alterarDropdown"></select>
+                                </div>
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="nameAdicionarRadio"
-                                    id="alterarRadioNao" checked>
-                                <label class="form-check-label"> Não possui adicional</label>
+                                <div class="form-group col-md-4">
+                                    <label for="alterarDescricao"> Descrição produto: </span>
+                                    </label>
+                                    <textarea rows="3" cols="40" style="max-width: 90%;"
+                                        id="alterarDescricao"></textarea>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label for="alterarDescricao"> Possui adicional?: </span>
+                                    </label>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="nameAdicionarRadio"
+                                            id="alterarRadioNao" checked>
+                                        <label class="form-check-label"> Não possui adicional</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="nameAdicionarRadio"
+                                            id="alterarRadioSim">
+                                        <label class="form-check-label"> Sim possui adicional</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <label>
+                                        <span> Imagem: </span>
+                                        <input type="file" class="upload-group" id="imagemUploadAlterar" />
+                                    </label>
+                                    <br>
+                                    <img class="razer" id="imagemAlterar" width="80" height="80"
+                                        onclick="clickAlterarImagem()">
+                                </div>
                             </div>
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="nameAdicionarRadio"
-                                    id="alterarRadioSim">
-                                <label class="form-check-label"> Sim possui adicional</label>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-10">
+                                    <button type="button" style="background-image: url('images/fundo-madeira.jpg');"
+                                        class="btn btn-dark btn-block"
+                                        onclick="buttonAlterarValidarCampos()">Alterar</button>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <button type="button" class="btn btn-light btn-outline-danger" data-dismiss="modal"
+                                        onclick="limparCamposAlterar()">Cancelar</button> &nbsp
+                                </div>
                             </div>
 
-                        </div>
-
-                        <label>
-                            <span> Imagem: </span>
-                            <input type="file" class="upload-group" id="imagemUploadAlterar" />
-                        </label>
-                        <br>
-                        <img class="razer" id="imagemAlterar" width="80" height="80" onclick="clickAlterarImagem()">
-                        <br><br>
-
-                        <button type="button" style="background-color: black;" class="btn btn-dark btn-block"
-                            onclick="buttonAlterarValidarCampos()">Alterar</button>
-
+                        </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"
-                            onclick="limparCamposAlterar()">Cancelar</button> &nbsp
-                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- MODAL REMOVER -->
-        <div class="modal fade" id="modalRemover" style="overflow-y: scroll ;" data-backdrop="static" tabindex="-1"
-            role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header" style="padding: 35px 50px;">
-                        <h4 style="color: #000000;"> Remover Produto </h4>
-                    </div>
-                    <div class="modal-body" style="padding: 40px 50px;">
-                        Deseja realmente remover este produto?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" style="background-color: black;" class="btn btn-dark"
-                            onclick="removerProduto()">Sim</button> &nbsp
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    </div>
+    <!-- MODAL REMOVER -->
+    <div class="modal fade" id="modalRemover" style="overflow-y: scroll ;" data-backdrop="static" tabindex="-1"
+        role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 35px 50px;" id="imageModalHeader">
+                    <h4 style="color: #fff;"> Remover Produto </h4>
+                </div>
+                <div class="modal-body" style="padding: 40px 50px;">
+                    Deseja realmente remover este produto?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" style="background-image: url('images/fundo-madeira.jpg');" class="btn btn-dark"
+                        onclick="removerProduto()">Sim</button> &nbsp
+                    <button type="button" class="btn btn-light btn-outline-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- MODAL ALERTA -->
-        <div class="modal fade" id="modalAlerta" style="overflow-y: scroll ;" data-backdrop="static" tabindex="-1"
-            role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header" style="padding: 35px 50px;">
-                        <h4 style="color: #000000;"> Alerta </h4>
-                    </div>
-                    <div class="modal-body" style="padding: 40px 50px;">
-                        <label id="alertaMenssagem"></label>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" style="background-color: black;" class="btn btn-dark"
-                            data-dismiss="modal">OK</button>
-                    </div>
+    <!-- MODAL ALERTA -->
+    <div class="modal fade" id="modalAlerta" style="overflow-y: scroll ;" data-backdrop="static" tabindex="-1"
+        role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 35px 50px;" id="imageModalHeader">
+                    <h4 style="color: #fff;"> Alerta </h4>
+                </div>
+                <div class="modal-body" style="padding: 40px 50px;">
+                    <label id="alertaMenssagem"></label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" style="background-image: url('images/fundo-madeira.jpg');" class="btn btn-dark"
+                        data-dismiss="modal">OK</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- MODAL PROGRESS -->
-        <div class="modal fade" id="modalProgress" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-center" style="top: 50%; transform: translateY(-50%);">
-                <div class="d-flex justify-content-center ">
-                    <div class="spinner-border text-primary" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
+    <!-- MODAL PROGRESS -->
+    <div class="modal fade" id="modalProgress" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-center" style="top: 50%; transform: translateY(-50%);">
+            <div class="d-flex justify-content-center ">
+                <div class="spinner-border text-dark" role="status">
+                    <span class="sr-only">Loading...</span>
                 </div>
             </div>
         </div>
+    </div>
 
     </div>
 

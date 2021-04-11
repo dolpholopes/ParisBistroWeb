@@ -1,13 +1,21 @@
 
+let tabela = document.getElementById("tabelaPedidos").getElementsByTagName("tbody")[0];
+
 let bd = firebase.firestore().collection("pedidos");
 
-let tabela = document.getElementById("tabelaPedidos").getElementsByTagName("tbody")[0];
+let bdEstadoEmpresa = firebase.firestore().collection("app");
 
 let pedidoSelecionadoFinalizarPedido;
 
 let pedidoSelecionadoCliente;
 
 let keyLista = []
+
+let audio = new Audio();
+audio.src = "audio/alerta.mp3"
+audio.loop = false;
+let audioAtivado = false;
+
 
 
 //==================================================== OUVINTE ====================================================
@@ -17,6 +25,12 @@ bd.where("pedido_status", "==", "em andamento").onSnapshot(function (documentos)
 	documentos.docChanges().forEach(function (changes) {
 
 		if (changes.type === "added") {
+			
+			if(audioAtivado){
+				audio.play();
+				$('#modalAlertaAudioPedido').modal()
+			}
+			
 			const doc = changes.doc
 			const dados = doc.data()
 			keyLista.push(dados.pedido_id)
@@ -85,22 +99,22 @@ function criarBotoesTabela(linha, dados) {
 
 	const buttonDetalhesPedido = document.createElement("button")
 	buttonDetalhesPedido.innerHTML = ` <i class="fas fa-info"></i> `
-	buttonDetalhesPedido.className = "btn btn-success btn-xs"
+	buttonDetalhesPedido.className = "btn btn-outline-success btn-xs"
 	buttonDetalhesPedido.style = "margin: auto; display: block;"
 
 	const buttonDetalhesClientes = document.createElement("button")
 	buttonDetalhesClientes.innerHTML = `<i class="fas fa-info"></i> `
-	buttonDetalhesClientes.className = "btn btn-success btn-xs"
+	buttonDetalhesClientes.className = "btn btn-outline-success btn-xs"
 	buttonDetalhesClientes.style = "margin: auto; display: block;"
 
 	const buttonImprimir = document.createElement("button")
 	buttonImprimir.innerHTML = `<i class="fas fa-print"></i> `
-	buttonImprimir.className = "btn btn-success btn-xs"
+	buttonImprimir.className = "btn btn-outline-success btn-xs"
 	buttonImprimir.style = "margin: auto; display: block;"
 
 	const buttonFinalizar = document.createElement("button")
 	buttonFinalizar.innerHTML = `<center><i class="fas fa-check"></i></center> `
-	buttonFinalizar.className = "btn btn-success btn-xs"
+	buttonFinalizar.className = "btn btn-outline-success btn-xs"
 	buttonFinalizar.style = "margin: auto; display: block;"
 
 	buttonDetalhesPedido.onclick = function () {
@@ -142,11 +156,11 @@ function clickDetalhePedido(dados) {
 
 	const data = new Date(Number(dados.pedido_data))
 	const date = moment(data).format('HH:mm:ss')
-	
+
 
 	id.innerHTML = dados.pedido_id
 	pedido_dados.innerHTML = dados.pedido_dados
-	pedido_pagamento.innerHTML ="Valor do pedido: " + dados.pedido_valor + "<br><br>" +  dados.pedido_forma_pagamento
+	pedido_pagamento.innerHTML = "Valor do pedido: " + dados.pedido_valor + "<br><br>" + dados.pedido_forma_pagamento
 	pedido_data.innerHTML = date
 
 }
@@ -183,19 +197,19 @@ function validarCamposNotificação() {
 }
 
 function obterDadosNotificacao(titulo, mensagem, token) {
-	if (token == "Sem token"){
+	if (token == "Sem token") {
 		abrirModalAlerta("Não foi possivel enviar uma notificação para esse cliente ")
-	}else{
+	} else {
 		firebase.firestore().collection("app").doc("notificacao").get().then(function (documento) {
 
 			const dados = documento.data()
 			const key = dados.key
-	
+
 			postMessage(titulo, mensagem, token, key)
 		}).catch(function (error) {
 			abrirModalAlerta("Erro ao enviar notificação " + error)
 		})
-	}	
+	}
 }
 
 function post(titulo, mensagem, topico, key) {
@@ -274,17 +288,17 @@ function clickFinalizarPedido(dados) {
 	pedidoSelecionadoFinalizarPedido = dados
 }
 
-function finalizarPedido(){
+function finalizarPedido() {
 	const dados = {
 		pedido_status: "finalizado"
 	}
 
-	firebase.firestore().collection("pedidos").doc(pedidoSelecionadoFinalizarPedido.pedido_id).update(dados).then(function(){
+	firebase.firestore().collection("pedidos").doc(pedidoSelecionadoFinalizarPedido.pedido_id).update(dados).then(function () {
 		$("#modalFinalizarPedido").modal("hide")
 
 		abrirModalAlerta("Sucesso ao finalizar pedido")
-	}).catch(function(error){
-		abrirModalAlerta("Erro ao finalizar pedido"+error)
+	}).catch(function (error) {
+		abrirModalAlerta("Erro ao finalizar pedido" + error)
 	})
 }
 
@@ -327,10 +341,10 @@ function pesquisar(opcao) {
 
 	for (i = 0; i < tr.length; i++) {
 		td = tr[i].getElementsByTagName("td")[opcao]
-		
+
 		if (td) {
 			valorItemTabela = td.textContent.toUpperCase()
-			
+
 			if (valorItemTabela.indexOf(filtro) == -1) {
 				tr[i].style.display = "none"
 			} else {
@@ -388,3 +402,59 @@ $("#maxRows").on("change", function () {
 		})
 	})
 })
+
+
+
+
+
+
+
+
+
+let estadoAtualEmpresa = false;
+bdEstadoEmpresa.doc("estadoempresa").onSnapshot(function (doc) {
+	estadoAtualEmpresa = doc.data().empresaaberta;
+
+	if (estadoAtualEmpresa) {
+		document.getElementById("buttonEstadoEmpresa").innerHTML = `<i class="fas fa-door-closed"></i> Fechar Estabelecimento`
+		document.getElementById("buttonEstadoEmpresa").className = `btn btn-outline-danger`
+	} else {
+		document.getElementById("buttonEstadoEmpresa").innerHTML = `<i class="fas fa-door-open"></i> Abrir Estabelecimento`
+		document.getElementById("buttonEstadoEmpresa").className = `btn btn-outline-success`
+	}
+})
+
+function estadoEmpresa() {
+
+	let dados = {
+		empresaaberta: !estadoAtualEmpresa
+	}
+
+	bdEstadoEmpresa.doc("estadoempresa").set(dados).then(function (){
+
+		if (estadoAtualEmpresa) {
+			abrirModalAlerta("Delivery aberto!")
+		} else {
+			abrirModalAlerta("Delivery fechado!")
+		}
+
+	}).catch(function (error) {
+		abrirModalAlerta("Erro no servidor")
+	});
+}
+
+
+function ativarSomPedido(){
+	if(audioAtivado){
+		document.getElementById("buttonAtivarSomPedido").innerHTML = '<i class="fas fa-volume-mute"></i>'
+		audioAtivado = false;
+	}else{
+		document.getElementById("buttonAtivarSomPedido").innerHTML = '<i class="fas fa-volume-up"></i>'
+		audioAtivado = true;
+	}
+	audioAtivado = !audioAtivado
+}
+
+function pararAudioPedido(){
+	audio.pause();
+}

@@ -45,19 +45,15 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Paris Bistrô</h3>
-                <strong><img src="images/logo preta.png" width="75" height="75"></strong>
-
+                <h3>Painel Administrativo</h3>
             </div>
 
             <ul class="list-unstyled components">
-
                 <li class="treeview">
                     <a href="pedidos.html" aria-expanded="false" class="dropdown-toggle">
                         <i class="fas fa-home"></i>
                         Pedidos
                     </a>
-
                 </li>
                 <li class="treeview active">
                     <a href="#categoriaSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -130,136 +126,69 @@
                     </ul>
                 </li>
             </ul>
-
         </nav>
 
         <!-- Conteudo da pagina  -->
         <div id="content">
-
-
-
-
             <!---  parte superior---------->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light" id="imageCardHeader">
                 <div class="container-fluid">
-                    <button type="button" id="sidebarCollapse" style="background-color: black;" class="btn btn-dark">
+                    <button type="button" id="sidebarCollapse" style="background-image: url('images/fundo-madeira.jpg');" class="btn btn-dark">
                         <i class="fas fa-align-left"></i>
                     </button>
                     <div class="form-group">
-                        <p style="font-family: 'Lobster'; font-size: 35px; color: #000000 "> Categoria</p>
+                        <p style="font-family: 'Lobster'; font-size: 35px; color: #fff "> Categorias</p>
                     </div>
                     <br>
                 </div>
             </nav>
-
-
-
             <!---  botao adicionar---------->
-
             <div class="card-body">
-
-
-                <button type="button" class="btn btn-dark mb-1" style="background-color: black;"
+                <button type="button" class="btn btn-dark mb-1" style="background-image: url('images/fundo-madeira.jpg');"
                     onclick="abrirModalAdicionar()">
-
-
                     <i class="fas fa-plus"></i>
-
                     Nova Categoria
                 </button>
             </div>
 
-
-
             <!---  pesquisa---------->
-
             <div style="margin: 0 auto; float: right;">
-
-
-
-                <input type="text" id="pesquisar0" onkeyup="pesquisar(0)" placeholder=" Pesquisar ID ...">
-
-                &nbsp
-                &nbsp
-                <input type="text" id="pesquisar1" onkeyup="pesquisar(1)" placeholder=" Pesquisar Nome ...">
-
-                &nbsp
-                &nbsp
-
-                <select name="state" id="maxRows" style="height: 30; margin-right: 15;">
-
+                <input class="form-control" type="text" id="pesquisar0" onkeyup="pesquisar(0)" placeholder=" Pesquisar ID ...">
+                <input class="form-control" type="text" id="pesquisar1" onkeyup="pesquisar(1)" placeholder=" Pesquisar Nome ...">
+                <select class="form-control" name="state" id="maxRows" style="height: 30; margin-right: 15;">
                     <option value="100"> Motrar Todos</option>
                     <option value="5"> 5</option>
                     <option value="10"> 10</option>
                     <option value="15"> 15</option>
                     <option value="20"> 20</option>
-
                 </select>
-
                 <br>
                 <br>
-
             </div>
-
-
-
-
-
             <!---  tabela ---------->
-
-
             <div class="table-responsive col-md-12">
-
-
                 <table class="table table-striped table-bordered " id="tabelaCategoria" cellspacing="0" cellpadding="0">
-
-
-
                     <!---  cabeçalho da tabela ---------->
-
                     <thead>
-
-
                         <tr>
-
                             <th class="th-sm" onclick="ordenarId()"> ID <i style="float: right;"
                                     class="fas fa-sort"></i> </th>
                             <th class="th-sm"> Nome</th>
+                            <th class="th-sm"> Exibir</th>
                             <th class="th-sm"> Ações </th>
-
                         </tr>
-
                     </thead>
-
                     <tbody>
-
-
-
-
-                        <!---  conteudo da tabela ---------->
-
+                       <!---  conteudo da tabela ---------->
                     </tbody>
-
-
-
-
                 </table>
-
                 <!---  paginacao---------->
-
                 <div class="pagination">
-
                     <nav>
                         <ul class="pagination " id="pagination"></ul>
                     </nav>
-
                 </div>
-
             </div>
-
-
-
-
         </div>
     </div>
 
@@ -268,38 +197,53 @@
     <div>
         <div class="modal fade" id="modalAdicionar" style="overflow-y: scroll ;" data-backdrop="static" tabindex="-1"
             role="dialog">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <div class="modal-header" style="padding: 35px 50px;">
-                        <h4 style="color: #000000;"> Adicionar Categoria </h4>
+                    <div class="modal-header" style="padding: 35px 50px;" id="imageModalHeader">
+                        <h4 style="color: #fff;"> Adicionar Categoria </h4>
                     </div>
                     <div class="modal-body" style="padding: 40px 50px;">
-                        <div class="form-group">
-                            <label for="adicionarID"> ID: </span> </label>
-                            <input type="number" class="form-control" id="adicionarID" />
-                        </div>
+                        <form>
+                            <div  class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label for="adicionarID"> ID: </span> </label>
+                                    <input type="number" class="form-control" id="adicionarID" />
+                                </div>
+        
+                                <div class="form-group col-md-9">
+                                    <label for="adicionarNome"> Nome: </span>
+                                    </label>
+                                    <input type="text" class="form-control" id="adicionarNome" />
+                                </div>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="adicionarNome"> Nome: </span>
-                            </label>
-                            <input type="text" class="form-control" id="adicionarNome" />
-                        </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>
+                                        <span> Imagem: </span>
+                                        <input type="file" class="upload-group" id="imagemUploadAdicionar" />
+                                    </label>
+                                    <br>
+                                    <img class="razer" id="imagemAdicionar" width="80" height="80" onclick="clickAdicionarImagem()">
+                                </div>
+                            </div>
 
-                        <label>
-                            <span> Imagem: </span>
-                            <input type="file" class="upload-group" id="imagemUploadAdicionar" />
-                        </label>
-                        <br>
-                        <img class="razer" id="imagemAdicionar" width="80" height="80" onclick="clickAdicionarImagem()">
-                        <br><br>
+                            <div class="form-row">
+                                <div class="form-group col-md-10">
+                                    <button type="button" style="background-image: url('images/fundo-madeira.jpg');" class="btn btn-dark btn-block"
+                                    onclick="buttonAdicionarValidarCampos()">Salvar</button>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <button type="button" class="btn btn-light btn-outline-danger" data-dismiss="modal"
+                            onclick="limparCamposAdicionar()">Cancelar</button> &nbsp
+                                </div>
 
-                        <button type="button" style="background-color: black;" class="btn btn-dark btn-block"
-                            onclick="buttonAdicionarValidarCampos()">Salvar</button>
+                            </div>
+                        </form>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"
-                            onclick="limparCamposAdicionar()">Cancelar</button> &nbsp
+                        
                     </div>
                 </div>
             </div>
@@ -308,37 +252,51 @@
         <!-- MODAL ALTERAR -->
         <div class="modal fade" id="modalAlterar" style="overflow-y: scroll ;" data-backdrop="static" tabindex="-1"
             role="dialog">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <div class="modal-header" style="padding: 35px 50px;">
-                        <h4 style="color: #000000;"> Alterar Categoria </h4>
+                    <div class="modal-header" style="padding: 35px 50px;"  id="imageModalHeader">
+                        <h4 style="color: #fff;"> Alterar Categoria </h4>
                     </div>
                     <div class="modal-body" style="padding: 40px 50px;">
-                        <div class="form-group">
-                            <label> <span class="glyphicon glyphicon-eye-open"> ID: </span> </label>
-                            <label type="text" id="alterarID"></label>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="alterarNome"> Nome: </span> </label>
-                            <input type="text" class="form-control" id="alterarNome" />
-                        </div>
-
-                        <label>
-                            <span> Imagem: </span>
-                            <input type="file" class="upload-group" id="imagemUploadAlterar" />
-                        </label>
-                        <br>
-                        <img class="razer" id="imagemAlterar" width="80" height="80" onclick="clickAlterarImagem()">
-                        <br><br>
-
-                        <button type="button" style="background-color: black;" class="btn btn-dark btn-block"
-                            onclick="buttonAlterarValidarCampos()">Alterar</button>
-
+                        <form>
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <label> <span class="glyphicon glyphicon-eye-open"> ID: </span> </label>
+                                    <label type="text" id="alterarID"></label>
+                                </div>
+        
+                                <div class="form-group col-md-10">
+                                    <label for="alterarNome"> Nome: </span> </label>
+                                    <input type="text" class="form-control" id="alterarNome" />
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>
+                                        <span> Imagem: </span>
+                                        <input type="file" class="upload-group" id="imagemUploadAlterar" />
+                                    </label>
+                                    <br>
+                                    <img class="razer" id="imagemAlterar" width="80" height="80" onclick="clickAlterarImagem()">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group  col-md-10">
+                                    <button type="button" style="background-image: url('images/fundo-madeira.jpg');" class="btn btn-dark btn-block"
+                                    onclick="buttonAlterarValidarCampos()">Alterar</button>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <button type="button" class="btn btn-light btn-outline-danger" data-dismiss="modal"
+                                    onclick="limparCamposAlterar()">Cancelar</button> &nbsp
+                                </div>
+                            </div>
+                        </form>
+                        
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"
-                            onclick="limparCamposAlterar()">Cancelar</button> &nbsp
+                        
                     </div>
                 </div>
             </div>
@@ -349,16 +307,16 @@
             role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header" style="padding: 35px 50px;">
-                        <h4 style="color: #000000;"> Remover Categoria </h4>
+                    <div class="modal-header" style="padding: 35px 50px;" id="imageModalHeader">
+                        <h4 style="color: #fff;"> Remover Categoria </h4>
                     </div>
                     <div class="modal-body" style="padding: 40px 50px;">
                         Deseja realmente remover esta categoria?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" style="background-color: black;" class="btn btn-dark"
+                        <button type="button" style="background-image: url('images/fundo-madeira.jpg');" class="btn btn-dark"
                             onclick="removerCategoria()">Sim</button> &nbsp
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-light btn-outline-danger" data-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
             </div>
@@ -369,14 +327,14 @@
             role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header" style="padding: 35px 50px;">
-                        <h4 style="color: #000000;"> Alerta </h4>
+                    <div class="modal-header" style="padding: 35px 50px;" id="imageModalHeader">
+                        <h4 style="color: #fff;"> Alerta </h4>
                     </div>
                     <div class="modal-body" style="padding: 40px 50px;">
                         <label id="alertaMenssagem"></label>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" style="background-color: black;" class="btn btn-dark"
+                        <button type="button" style="background-image: url('images/fundo-madeira.jpg');" class="btn btn-dark"
                             data-dismiss="modal">OK</button>
                     </div>
                 </div>
@@ -387,7 +345,7 @@
         <div class="modal fade" id="modalProgress" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-center" style="top: 50%; transform: translateY(-50%);">
                 <div class="d-flex justify-content-center ">
-                    <div class="spinner-border text-primary" role="status">
+                    <div class="spinner-border text-dark" role="status">
                         <span class="sr-only">Loading...</span>
                     </div>
                 </div>

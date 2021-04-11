@@ -1,48 +1,48 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
-        <title>Paris Bistro - Pedidos</title>
-    
-        <!-- Bootstrap CSS CDN -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Paris Bistro - Pedidos</title>
+
+    <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
-    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-<!-- Our Custom CSS -->
-<link rel="stylesheet" href="css/style.css">
+        integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
 
-<!-- Font Awesome JS -->
-<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
-    integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
-    crossorigin="anonymous"></script>
-<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
-    integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
-    crossorigin="anonymous"></script>
-<script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-add-css="false"></script>
-<link href="https://use.fontawesome.com/releases/v5.15.1/css/svg-with-js.css" rel="stylesheet" />
-
-
-<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+        integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+        integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+        crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-add-css="false"></script>
+    <link href="https://use.fontawesome.com/releases/v5.15.1/css/svg-with-js.css" rel="stylesheet" />
 
 
-<script src="/__/firebase/7.6.1/firebase-app.js"></script>
-<script src="/__/firebase/7.6.1/firebase-storage.js"></script>
-<script src="/__/firebase/7.6.1/firebase-firestore.js"></script>
-<script src="/__/firebase/7.6.1/firebase-auth.js"></script>
-<script src="/__/firebase/init.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 
-<script src="js/logado.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
-<script src="https://compressjs.herokuapp.com/compress.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" 
-	integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" 
-	crossorigin="anonymous"></script>
+    <script src="/__/firebase/7.6.1/firebase-app.js"></script>
+    <script src="/__/firebase/7.6.1/firebase-storage.js"></script>
+    <script src="/__/firebase/7.6.1/firebase-firestore.js"></script>
+    <script src="/__/firebase/7.6.1/firebase-auth.js"></script>
+    <script src="/__/firebase/init.js"></script>
+
+    <script src="js/logado.js"></script>
+
+    <script src="https://compressjs.herokuapp.com/compress.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
+        integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
+        crossorigin="anonymous"></script>
 
 </head>
 
@@ -52,18 +52,18 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Paris Bistrô</h3>
-                <strong><img src="images/logo preta.png" width="75" height="75"></strong>
+                <h3>Painel Administrativo</h3>
+               
             </div>
 
             <ul class="list-unstyled components">
-                
+
                 <li class="treeview active">
                     <a href="pedidos.html" aria-expanded="false" class="dropdown-toggle">
                         <i class="fas fa-home"></i>
                         Pedidos
                     </a>
-                    
+
                 </li>
                 <li class="treeview">
                     <a href="#categoriaSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -136,233 +136,282 @@
                     </ul>
                 </li>
             </ul>
-            
+
         </nav>
 
-               <!-- Conteudo da pagina  -->
-               <div id="content">
+        <!-- Conteudo da pagina  -->
+        <div id="content">
 
-                <!---  parte superior---------->
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div class="container-fluid">
-                        <button type="button" id="sidebarCollapse" style="background-color: black;" class="btn btn-dark">
-                            <i class="fas fa-align-left"></i>
-                        </button>
-                        <div class="form-group">
-                            <p style="font-family: 'Lobster'; font-size: 35px; color: #000000 "> Pedidos</p>
-                        </div>
-                        <br>
+            <!---  parte superior---------->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light" id="imageCardHeader">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" style="background-image: url('images/fundo-madeira.jpg');" class="btn btn-dark">
+                        <i class="fas fa-align-left"></i>
+                    </button>
+                    <div style="position: relative; width: 100%;">
+                        <p style="text-align: center; font-family: 'Lobster'; font-size: 35px; color: #fff "> Pedidos</p>
                     </div>
-                </nav>
-    
-    
-                <!---  pesquisa---------->
-    
-                <div style="margin: 0 auto; float: right;">
-                    <input type="text" id="pesquisar0" onkeyup="pesquisar(0)" placeholder=" Pesquisar cliente ...">
-    
-                    &nbsp
-                    &nbsp
-    
-                    <select name="state" id="maxRows" style="height: 30; margin-right: 15;">
-                        <option value="100"> Motrar Todos</option>
-                        <option value="5"> 5</option>
-                        <option value="10"> 10</option>
-                        <option value="15"> 15</option>
-                        <option value="20"> 20</option>
-                    </select>
-    
                     <br>
-                    <br>
+                    <button id="buttonAtivarSomPedido" onclick="ativarSomPedido()" style="float: right;">
+                        <i class="fas fa-volume-mute"></i>
+                    </button>
                 </div>
-      
-    
-                <!---  tabela ---------->  
-    
-                <div class="table-responsive col-md-12">  
-    
-                    <table class="table table-striped table-bordered " id="tabelaPedidos" cellspacing="0" cellpadding="0">
-    
-                        <!---  cabeçalho da tabela ---------->
-    
-                        <thead>
-                            <tr>
-                                <th class="th-sm"> Cliente </th>
-                                <th class="th-sm"> Pedido </th>
-                                <th class="th-sm"> Hora </th>
-                                <th class="th-sm"> Info. pedido </th>
-                                <th class="th-sm"> Info. cliente </th>
-                                <th class="th-sm"> Imprimir </th>
-                                <th class="th-sm"> Finalizar </th>
-                            </tr>
-                        </thead>
-    
-                        <tbody>           
-    
-                            <!---  conteudo da tabela ---------->
-                        </tbody>
-                      </table>
-    
-                    <!---  paginacao---------->
-    
-                    <div class="pagination">
-                        <nav>
-                            <ul class="pagination " id="pagination" ></ul>
-                        </nav>
-    
-                    </div>
-    
-                </div>
-    
-    
-    
-    
+            </nav>
+
+
+            <!---  pesquisa---------->
+
+            <div style="margin: 0 auto; float: right;">
+                <input type="text" class="form-control" id="pesquisar0" onkeyup="pesquisar(0)" placeholder=" Pesquisar cliente ...">
+                <select class="form-control" name="state" id="maxRows" style="height: 30; margin-right: 15;">
+                    <option value="100"> Motrar Todos</option>
+                    <option value="5"> 5</option>
+                    <option value="10"> 10</option>
+                    <option value="15"> 15</option>
+                    <option value="20"> 20</option>
+                </select>
+                <button id="buttonEstadoEmpresa" type="button" style="float: right;" class="btn btn-outline-success "
+                    onclick="estadoEmpresa()">
+                    <i class="fas fa-door-open"></i> 
+                    Abrir Estabelecimento
+                </button>
+
+                <br>
+                <br>
             </div>
+
+
+            <!---  tabela ---------->
+
+            <div class="table-responsive col-md-12">
+
+                <table class="table table-striped table-bordered " id="tabelaPedidos" cellspacing="0" cellpadding="0">
+
+                    <!---  cabeçalho da tabela ---------->
+
+                    <thead>
+                        <tr>
+                            <th class="th-sm"> Cliente </th>
+                            <th class="th-sm"> Pedido </th>
+                            <th class="th-sm"> Hora </th>
+                            <th class="th-sm"> Info. pedido </th>
+                            <th class="th-sm"> Info. cliente </th>
+                            <th class="th-sm"> Imprimir </th>
+                            <th class="th-sm"> Finalizar </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <!---  conteudo da tabela ---------->
+                    </tbody>
+                </table>
+
+                <!---  paginacao---------->
+
+                <div class="pagination">
+                    <nav>
+                        <ul class="pagination " id="pagination"></ul>
+                    </nav>
+
+                </div>
+
+            </div>
+
+
+
+
         </div>
-    
-    
-        
-        <div>
-            <!-- MODAL DETALHES CLIENTES -->
-            <div class="modal fade" id="modalCliente" style="overflow-y:scroll ;" data-backdrop="static" tabindex="-1"
-			role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<!----- cabeçalho  ------------->
-					<div class="modal-header" style="padding: 35px 50px;">
-						<h4 style="color: #000000"> Dados Cliente</h4>
-					</div>
+    </div>
 
-					<!----- corpo  ------------->
-					<div class="modal-body" style="padding: 40px 50px;">
-						<div class="form-group">
-							<label > Nome </span> </label>
-							<label type="text" class="form-control" id="clienteNome"></label>
-						</div>
 
-						<div class="form-group">
-								<label > Endereço </span> </label>
-								<label type="text" style="height: auto;" class="form-control" id="clienteEndereco"></label>
-						</div>
 
-						<div class="form-group">
-								<label > Contato </span> </label>
-								<label type="text" class="form-control" id="clienteContato"></label>
-						</div>
+    <div>
+        <!-- MODAL DETALHES CLIENTES -->
+        <div class="modal fade" id="modalCliente" style="overflow-y:scroll ;" data-backdrop="static" tabindex="-1"
+            role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <!----- cabeçalho  ------------->
+                    <div class="modal-header" style="padding: 35px 50px;">
+                        <h4 style="color: #27140A"> Dados Cliente</h4>
+                    </div>
 
-						<button type="button" style="background-color: black;" class="btn btn-dark btn-default float-right" data-dismiss="modal" > Ok </button>
-                        
+                    <!----- corpo  ------------->
+                    <div class="modal-body" style="padding: 40px 50px;">
+
+                        <form>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label> Nome </span> </label>
+                                    <label type="text" class="form-control" id="clienteNome"></label>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label> Endereço </span> </label>
+                                    <label type="text" style="height: auto;" class="form-control"
+                                        id="clienteEndereco"></label>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label> Contato </span> </label>
+                                    <label type="text" class="form-control" id="clienteContato"></label>
+                                </div>
+                            </div>
+
+                        </form>
+
+
+                        <button type="button" style="background-image: url('images/fundo-madeira.jpg');"
+                            class="btn btn-dark btn-default float-right" data-dismiss="modal"> Ok </button>
+
                         <div>
-							<br><br><br>
-							<h4 style="color:#000000"> Enviar Notificação</h4>
-							<br>
-						</div>
-	
-						<div class="form-group">
-							<label > Título Notificação </span> </label>
-							<input type="text" class="form-control" id="clienteTituloNotificacao">
-						</div>
-
-						<div class="form-group">
-								<label > Mensagem Notificação </span> </label>
-								<input type="text" class="form-control" id="clienteMensagemNotificacao">
-						</div>
-
-						<button type="button" style="background-color: black;" class="btn btn-dark  btn-block"  onclick="validarCamposNotificação()" > Enviar Notificação </button>
-				
-					</div>
-				</div>
-			</div>
-		</div>
-    
-            <!-- MODAL DETALHES PEDIDO -->
-            <div class="modal fade" id="modalPedido" style="overflow-y:scroll ;" data-backdrop="static" tabindex="-1"
-			role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<!----- cabeçalho  ------------->
-					<div class="modal-header" style="padding: 35px 50px;">
-						<h4 style="color: #000000"> Dados Pedido</h4>
-					</div>
-
-					<!----- corpo  ------------->
-					<div class="modal-body" style="padding: 40px 50px;">
-						<div class="form-group">
-							<label > ID </span> </label>
-							<label type="text" class="form-control" id="pedidoID"></label>
-						</div>
-
-						<div class="form-group">
-								<label > Pedido </span> </label>
-								<label type="text" style="height: auto;" class="form-control" id="pedidoDados"></label>
-						</div>
-
-						<div class="form-group">
-								<label > Dados Pagamento </span> </label>
-								<label type="text" style="height: auto;" class="form-control" id="pedidoPagamento"></label>
+                            <br><br>
+                            <h4 style="color:#27140A"> Enviar Notificação</h4>
+                            <br>
                         </div>
-                        
+
                         <div class="form-group">
-                            <label > Data/Hora </span> </label>
-                            <label type="text" class="form-control" id="pedidoData"></label>
-                    </div>
-						<button type="button" style="background-color: black;" class="btn btn-dark btn-default float-right" data-dismiss="modal" > Ok </button>
-                    </div>
-                    
-				</div>
-			</div>
-		</div>
+                            <label> Título Notificação </span> </label>
+                            <input type="text" class="form-control" id="clienteTituloNotificacao">
+                        </div>
 
+                        <div class="form-group">
+                            <label> Mensagem Notificação </span> </label>
+                            <input type="text" class="form-control" id="clienteMensagemNotificacao">
+                        </div>
 
-            <!-- MODAL FINALIZAR PEDIDO -->
-            <div class="modal fade" id="modalFinalizarPedido" style="overflow-y: scroll ;" data-backdrop="static" tabindex="-1"
-                role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header" style="padding: 35px 50px;">
-                            <h4 style="color: #000000;"> Finalizar Pedido </h4>
-                        </div>
-                        <div class="modal-body" style="padding: 40px 50px;">
-                            Deseja finalizar o pedido?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" style="background-color: black;" class="btn btn-dark" onclick="finalizarPedido()">Sim</button> &nbsp
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        </div>
+                        <button type="button" style="background-image: url('images/fundo-madeira.jpg');" class="btn btn-dark  btn-block"
+                            onclick="validarCamposNotificação()"> Enviar Notificação </button>
+
                     </div>
                 </div>
             </div>
-    
-            <!-- MODAL ALERTA -->
-            <div class="modal fade" id="modalAlerta" style="overflow-y: scroll ;" data-backdrop="static" tabindex="-1"
-                role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header" style="padding: 35px 50px;">
-                            <h4 style="color: #000000;"> Alerta </h4>
-                        </div>
-                        <div class="modal-body" style="padding: 40px 50px;">
-                            <label id="alertaMenssagem"></label>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" style="background-color: black;" class="btn btn-dark" data-dismiss="modal">OK</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    
-            <!-- MODAL PROGRESS -->
-            <div class="modal fade" id="modalProgress" tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-center" style="top: 50%; transform: translateY(-50%);">
-                    <div class="d-flex justify-content-center ">
-                        <div class="spinner-border text-primary" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    
         </div>
+
+        <!-- MODAL DETALHES PEDIDO -->
+        <div class="modal fade" id="modalPedido" style="overflow-y:scroll ;" data-backdrop="static" tabindex="-1"
+            role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <!----- cabeçalho  ------------->
+                    <div class="modal-header" style="padding: 35px 50px;">
+                        <h4 style="color: #27140A"> Dados Pedido</h4>
+                    </div>
+
+                    <!----- corpo  ------------->
+                    <div class="modal-body" style="padding: 40px 50px;">
+                        <form>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label> ID </span> </label>
+                                    <label type="text" class="form-control" id="pedidoID"></label>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label> Data/Hora </span> </label>
+                                    <label type="text" class="form-control" id="pedidoData"></label>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label> Dados Pagamento </span> </label>
+                                    <label type="text" style="height: auto;" class="form-control"
+                                        id="pedidoPagamento"></label>
+                                </div>
+
+                            </div>
+                            <div class="form-row">
+
+                                <div class="form-group">
+                                    <label> Pedido </span> </label>
+                                    <label type="text" style="height: auto;" class="form-control"
+                                        id="pedidoDados"></label>
+                                </div>
+
+
+                            </div>
+                        </form>
+
+
+                        <button type="button" style="background-image: url('images/fundo-madeira.jpg');"
+                            class="btn btn-dark btn-default float-right" data-dismiss="modal"> Ok </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- MODAL FINALIZAR PEDIDO -->
+        <div class="modal fade" id="modalFinalizarPedido" style="overflow-y: scroll ;" data-backdrop="static"
+            tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="padding: 35px 50px;">
+                        <h4 style="color: #27140A;"> Finalizar Pedido </h4>
+                    </div>
+                    <div class="modal-body" style="padding: 40px 50px;">
+                        Deseja finalizar o pedido?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" style="background-image: url('images/fundo-madeira.jpg');" class="btn btn-dark"
+                            onclick="finalizarPedido()">Sim</button> &nbsp
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL ALERTA -->
+        <div class="modal fade" id="modalAlerta" style="overflow-y: scroll ;" data-backdrop="static" tabindex="-1"
+            role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="padding: 35px 50px;">
+                        <h4 style="color: #27140A;"> Alerta </h4>
+                    </div>
+                    <div class="modal-body" style="padding: 40px 50px;">
+                        <label id="alertaMenssagem"></label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" style="background-image: url('images/fundo-madeira.jpg');" class="btn btn-dark"
+                            data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL PROGRESS -->
+        <div class="modal fade" id="modalProgress" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-center" style="top: 50%; transform: translateY(-50%);">
+                <div class="d-flex justify-content-center ">
+                    <div class="spinner-border text-dark" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AUDIO PEDIDO-->
+        <div class="modal fade" id="modalAlertaAudioPedido" style="overflow-y: scroll ;" data-backdrop="static" tabindex="-1"
+            role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="padding: 35px 50px;">
+                        <h4 style="color: #27140A;"> Alerta </h4>
+                    </div>
+                    <div class="modal-body" style="padding: 40px 50px;">
+                        <label id="alertaMenssagem"> Novo Pedido Recebido</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="pararAudioPedido()" type="button" style="background-image: url('images/fundo-madeira.jpg');" class="btn btn-dark"
+                            data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
     </div>
 
     <!-- jQuery CDN - Slim version (=without AJAX) -->

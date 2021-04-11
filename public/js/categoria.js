@@ -47,7 +47,8 @@ function criarItensTabela(dados) {
 
 	const colunaId = linha.insertCell(0)
 	const colunaNome = linha.insertCell(1)
-	const colunaAcoes = linha.insertCell(2)
+	const colunaExibir = linha.insertCell(2)
+	const colunaAcoes = linha.insertCell(3)
 
 	const itemId = document.createTextNode(dados.id)
 	const itemNome = document.createTextNode(dados.nome) 
@@ -55,6 +56,19 @@ function criarItensTabela(dados) {
 	colunaId.appendChild(itemId)
 	colunaNome.appendChild(itemNome)
 	
+	let valor = ""
+	if(dados.exibir_categoria){
+		valor = "checked"
+	}
+
+	const checkBoxDiv = document.createElement("div")
+	checkBoxDiv.innerHTML = `<input class="form-check-input" onclick="exibirCategoriaNoApp(${dados.id})" type="checkbox" value="" id="checkBox${dados.id}" ${valor}>
+	<label class="form-check-label" for="checkBox${dados.id}"></label>`
+	checkBoxDiv.className = "form-check"
+	checkBoxDiv.style = "display:block; margin-left: 45%"
+
+	colunaExibir.appendChild(checkBoxDiv)
+
 	criarBotoesTabela(colunaAcoes,dados)
 
 	ordemCrescente()
@@ -67,17 +81,50 @@ function alterarItensTabela(dados) {
 	const row = tabela.rows[index]
 	const cellId = row.cells[0]
 	const cellNome = row.cells[1]
-	const acoes = row.cells[2]
+	const cellExibir = row.cells[2]
+	const acoes = row.cells[3]
 
 	acoes.remove()
+	cellExibir.remove()
 
-	const colunaAcoes = row.insertCell(2)
+	const colunaExibir = row.insertCell(2)
+	const colunaAcoes = row.insertCell(3)
 
 	cellId.innerText = dados.id
 	cellNome.innerText = dados.nome
 
+	let valor = ""
+	if(dados.exibir_categoria){
+		valor = "checked"
+	}
+
+	const checkBoxDiv = document.createElement("div")
+	checkBoxDiv.innerHTML = `<input class="form-check-input" onclick="exibirCategoriaNoApp(${dados.id})" type="checkbox" value="" id="checkBox${dados.id}" ${valor}>
+	<label class="form-check-label" for="checkBox${dados.id}"></label>`
+	checkBoxDiv.className = "form-check"
+	checkBoxDiv.style = "display:block; margin-left: 45%"
+
+	cellExibir.appendChild(checkBoxDiv)
+
 	criarBotoesTabela(colunaAcoes,dados)
 
+}
+
+
+function exibirCategoriaNoApp(id){
+	abrirModalProgress();
+	let checkbox = document.getElementById("checkbox"+id);
+	let dados = {
+		exibir_categoria: checkbox.checked
+	}
+	bd.doc(id+"").update(dados).then(function(){
+		removerModalProgress();
+		$("#modalAlterar").modal("hide")
+		abrirModalAlerta("Sucesso ao alterar dados")
+	}).catch(function(error){
+		removerModalProgress();
+		abrirModalAlerta("Erro ao alterar dados: " + error)
+	})
 }
 
 
@@ -96,11 +143,11 @@ function criarBotoesTabela(colunaAcoes,dados){
 
 	const buttonAlterar = document.createElement("button")
 	buttonAlterar.innerHTML = ` <i class="fas fa-edit"></i> `
-	buttonAlterar.className = "btn btn-success btn-xs"
+	buttonAlterar.className = "btn btn-outline-success btn-xs"
 
 	const buttonRemover = document.createElement("button")
 	buttonRemover.innerHTML = `<i class="fas fa-trash-alt"></i> `
-	buttonRemover.className = "btn btn-danger btn-xs"
+	buttonRemover.className = "btn btn-outline-danger btn-xs"
 
 	buttonAlterar.onclick = function () {
 		abrirModalAlterar(dados) 
@@ -257,6 +304,7 @@ function salvarDadosFirebase(id, nome, url_imagem) {
 	const dados = {
 		id: id,
 		nome: nome,
+		exibir_categoria: true,
 		url_imagem: url_imagem
 	}
 
