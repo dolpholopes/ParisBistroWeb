@@ -113,7 +113,7 @@ function alterarItensTabela(dados) {
 
 function exibirCategoriaNoApp(id){
 	abrirModalProgress();
-	let checkbox = document.getElementById("checkbox"+id);
+	let checkbox = document.getElementById("checkBox"+id);
 	let dados = {
 		exibir_categoria: checkbox.checked
 	}
