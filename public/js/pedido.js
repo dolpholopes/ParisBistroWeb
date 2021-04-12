@@ -183,7 +183,7 @@ function clickDetalheCliente(dados) {
 }
 
 // Notificação
-function validarCamposNotificação() {
+function validarCamposNotificacao() {
 	const titulo = document.getElementById("clienteTituloNotificacao").value
 	const mensagem = document.getElementById("clienteMensagemNotificacao").value
 
@@ -205,7 +205,8 @@ function obterDadosNotificacao(titulo, mensagem, token) {
 			const dados = documento.data()
 			const key = dados.key
 
-			postMessage(titulo, mensagem, token, key)
+			abrirModalProgress()
+			post(titulo, mensagem, token, key)
 		}).catch(function (error) {
 			abrirModalAlerta("Erro ao enviar notificação " + error)
 		})
@@ -222,6 +223,7 @@ function post(titulo, mensagem, topico, key) {
 	xmlHttpRequest.setRequestHeader("Authorization", key)
 
 	xmlHttpRequest.onreadystatechange = function () {
+		removerModalProgress();
 		if (xmlHttpRequest.status == 200) {
 			limparCampos()
 			abrirModalAlerta("Sucesso ao enviar a notificação")

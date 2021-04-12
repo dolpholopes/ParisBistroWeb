@@ -1,27 +1,3 @@
-
-
-let informativoRecuperadoBD;
-
-let bd = firebase.firestore().collection("app").doc("homeapp")
-
-
-
-//==================================================== OUVINTE ====================================================
-bd.onSnapshot(function(documento){
-    const dados = documento.data()
-
-    const informativo = document.getElementById("informativo")
-    const imagem1 = document.getElementById("imagem1")
-    const imagem2 = document.getElementById("imagem2")
-
-	informativoRecuperadoBD = dados.informativo
-
-    informativo.value = dados.informativo
-    imagem1.src = dados.url_imagem1
-    imagem2.src = dados.url_imagem2
-})
-
-
 function validarCamposNotificação(){
 	const titulo = document.getElementById("tituloNotificacao").value
 	const mensagem = document.getElementById("mensagemNotificacao").value
@@ -36,16 +12,17 @@ function validarCamposNotificação(){
 }
 
 function obterDadosNotificacao(titulo,mensagem){
-	firebase.firestore().collection("app").doc("notificacao").get().then(function(documento){
+    firebase.firestore().collection("app").doc("notificacao").get().then(function(documento){
+        const dados = documento.data()
+        const key = dados.key
+        const topico = dados.topico
 
-		const dados = documento.data()
-		const key = dados.key
-		const topico = dados.topico
+        abrirModalProgress()
+        post(titulo,mensagem,topico,key)
+    }).catch(function(error){
+        abrirModalAlerta("Erro ao enviar Notificação: "+ error)
+    })
 
-		postMessage(titulo, mensagem, topico, key)
-	}).catch(function(error){
-		abrirModalAlerta("Erro ao enviar notificação " + error)
-	})
 }
 
 function post(titulo, mensagem, topico, key){
@@ -71,7 +48,8 @@ function post(titulo, mensagem, topico, key){
 		"to": topico,
 		"data":  {
 			"titulo":titulo,
-			"mensagem":mensagem
+			"mensagem":mensagem,
+			"url_imagem": "https://firebasestorage.googleapis.com/v0/b/paris-bistro-6b97e.appspot.com/o/app%2Fhomeapp%2Flogo_branca.png?alt=media&token=7f741e31-3f7d-4731-9c9a-9cbabebb0f32"
 		}
 	}
 
@@ -105,4 +83,11 @@ function abrirModalAlerta(mensagem) {
 function limparCampos(){
 	document.getElementById("tituloNotificacao").value = ""
 	document.getElementById("mensagemNotificacao").value = ""
+}
+
+//==================================================== PROXIMO CAMPO ====================================================
+function proximoInput(id, evento){
+    if (evento.keyCode == 13){
+        document.getElementById(id).focus()
+    }
 }
