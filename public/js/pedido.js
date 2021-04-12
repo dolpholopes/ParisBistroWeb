@@ -169,6 +169,8 @@ function clickDetalhePedido(dados) {
 function clickDetalheCliente(dados) {
 	$("#modalCliente").modal()
 
+	abrirCampos()
+
 	const cliente_nome = document.getElementById("clienteNome")
 	const cliente_endereco = document.getElementById("clienteEndereco")
 	const cliente_contato = document.getElementById("clienteContato")
@@ -237,7 +239,8 @@ function post(titulo, mensagem, topico, key) {
 		"to": topico,
 		"data": {
 			"titulo": titulo,
-			"mensagem": mensagem
+			"mensagem": mensagem,
+			"url_imagem": "https://respostas.sebrae.com.br/wp-content/uploads/2020/04/delivery-capa.png"
 		}
 	}
 
@@ -327,10 +330,14 @@ function abrirModalAlerta(mensagem) {
 
 //==================================================== LIMPAR CAMPOS ====================================================
 function limparCampos() {
-	document.getElementById("clienteTituloNotificacao").value = ""
-	document.getElementById("clienteMensagemNotificacao").value = ""
+	document.getElementById("clienteTituloNotificacao").value = " "
+	document.getElementById("clienteMensagemNotificacao").value = " "
 }
 
+function abrirCampos() {
+	document.getElementById("clienteTituloNotificacao").value = "Paris Bistrô Delivery"
+	document.getElementById("clienteMensagemNotificacao").value = "Seu pedido saiu para entrega!! Aguarde alguns minutos."
+}
 
 //==================================================== FUNÇOES TABELA ====================================================
 //-----------------------------pesquisa por id e nome
