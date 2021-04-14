@@ -101,10 +101,9 @@
                         <li>
                             <a href="app.html">Gerenciar app</a>
                         </li>
-                        <!-- 
                         <li>
                             <a href="notificacao.html">Enviar notificação</a>
-                        </li> -->
+                        </li>
                     </ul>
                 </li>
                 <!--
@@ -149,32 +148,24 @@
                 </div>
             </nav>
 
-
             <div class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="wrap" style="margin: 0 auto; float: center;">
-
-                    <div>
-                        <h4 style="font-size: 20px; float: center; color: #27140A ;"> Enviar Notificações para todos os usuarios</h4>
-                    </div>
-                    <br>
-
-                    <div class="form-group">
-                        <label for="tituloNotificacao"> <span class="glyphicon glyphicon-eye-open">  </span> Titulo notificação: </label>
+				<div class="wrap" style="margin: 0 auto; float: center;">
+					<div class="mx-auto d-block" style="width: 380;">
+							<h4 style="font-size: 20px; color: #27140A ;"> Enviar notificação para todos os Usuários</h4>
+							<br><br>
+					</div>
+					<div class="form-group">
+						<label for="tituloNotificacao">   Título Notificação</label>
 						<input type="text" class="form-control" id="tituloNotificacao"  onkeydown="proximoInput('mensagemNotificacao',event)"/>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="mensagemNotificacao"> <span class="glyphicon glyphicon-eye-open">  </span> Mensagem notificação: </label>
+					</div>
+					<div class="form-group">
+						<label for="mensagemNotificacao"> Mensagem Notificação </label>
 						<input type="text" class="form-control" id="mensagemNotificacao" onkeydown="proximoInput('buttonEnviar',event)" />
-                    </div>
-
-                    <br>
-                    <button type="submit" id="buttonEnviar" style="background-image: url('images/fundo-madeira.jpg');" class="btn btn-dark btn-block" onclick="validarCamposNotificacao()"> Enviar Notificação</button>
-
-                </div>
-            </div>
-
-
+					</div>
+				<button type="submit" id="buttonEnviar" class="btn btn-light btn-block" style="background-image: url('images/fundo-madeira.jpg');"
+                    onclick="validarCamposNotificacao()"> Enviar Notificação</button>
+				</div>
+			</div>
 
         </div>
     </div>
